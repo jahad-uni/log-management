@@ -1,0 +1,2466 @@
+{
+	"info": {
+		"_postman_id": "4451c394-4bb4-4e22-bfc8-4a9e7af82671",
+		"name": "Logzi API Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Logs Pipelines",
+			"item": [
+				{
+					"name": "Create a Pipeline",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "default"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"pipeline11\",\r\n  \"description\": \"des1\",\r\n  \"filters\": [\r\n    \"filter:1\",\r\n    \"filter:2\"\r\n  ],\r\n  \"tags\": [\r\n    \"tag1\",\r\n    \"tag2\"\r\n  ],\r\n  \"updatedBy\": \"1\",\r\n  \"type\": \"custom\",\r\n  \"processors\": [\r\n      {\r\n  \"is_enabled\": true,\r\n   \"name\": \"sp1\",\r\n  \"type\": \"grok-parser\", \r\n   \"grok-parser\":\r\n    {\r\n      \"source\": \"message\",\r\n      \"grok\": {\r\n        \"match_rules\": \"grok rules\",\r\n        \"support_rules\": \"grok support rules\"\r\n      },\r\n      \"helper_rules\": [\r\n        \"rule1\",\r\n        \"rule2\"\r\n      ],\r\n      \"is_enabled\": false\r\n    }\r\n    },\r\n      {\r\n  \"is_enabled\": true,\r\n   \"name\": \"sp1\",\r\n  \"type\": \"date-remapper\", \r\n   \"date-remapper\":\r\n    {\r\n      \"sources\": [\"message\",\r\n      \"message1\"]}},\r\n          {\r\n  \"is_enabled\": true,\r\n   \"name\": \"sp status remapper Test\",\r\n  \"type\": \"status-remapper\", \r\n   \"status-remapper\":\r\n    {\r\n      \"sources\": [\"message\",\r\n      \"message1\"]}}\r\n      ,\r\n      {\r\n  \"is_enabled\": true,\r\n   \"name\": \"sp1\",\r\n  \"type\": \"date-remapper\", \r\n   \"date-remapper\":\r\n    {\r\n      \"sources\": [\"message\",\r\n      \"message1\"]}},\r\n          {\r\n  \"is_enabled\": true,\r\n   \"name\": \"sp sservice remapper Test\",\r\n  \"type\": \"service-remapper\", \r\n   \"service-remapper\":\r\n    {\r\n      \"sources\": [\"message\",\r\n      \"message1\"]}}\r\n      , {\r\n  \"is_enabled\": true,\r\n   \"name\": \"sp message remapper Test\",\r\n  \"type\": \"message-remapper\", \r\n   \"message-remapper\":\r\n    {\r\n      \"sources\": [\"message\",\r\n      \"message1\",\"message2\",\"message3\"]}},\r\n      {\r\n          \"is_enabled\": false,\r\n   \"name\": \"sp attribute remapper Test\",\r\n  \"type\": \"attribute-remapper\", \r\n   \"attribute-remapper\":{\r\n       \"override_on_conflict\":true,\r\n       \"preserve_source\" : false,\r\n        \"sources\": [\"message\",\r\n      \"message1\",\"message2\",\"message3\"],\r\n      \"source_type\":\"tag\",\r\n      \"target\" :\"sp3\",\r\n      \"target_type\" :\"attribute\",\r\n      \"target_format\":\"double\"\r\n   }\r\n\r\n      },\r\n      {\r\n          \"is_enabled\": false,\r\n   \"name\": \"sp url parser Test\",\r\n  \"type\": \"url-parser\", \r\n   \"url-parser\":{\r\n        \"sources\": [\"message\",\r\n      \"message1\",\"message2\",\"message3\"],\r\n      \"target\" :\"sp3\",\r\n      \"normalize_ending_slashes\" :true\r\n\r\n   }\r\n      },\r\n         {\r\n          \"is_enabled\": false,\r\n   \"name\": \"sp user agent parser Test\",\r\n  \"type\": \"user-agent-parser\", \r\n   \"user-agent-parser\":{\r\n        \"sources\": [\"message\",\r\n      \"message1\",\"message2\",\"message3\"],\r\n      \"target\" :\"sp90\",\r\n      \"is_encoded\" :true\r\n\r\n   }\r\n         },\r\n          {\r\n          \"is_enabled\": false,\r\n   \"name\": \"sp category-processor Test\",\r\n  \"type\": \"category-processor\", \r\n   \"category-processor\":{\r\n        \"categories\": [\r\n         {  \"filter\":{\"query\":\"query1\"},\r\n         \"name\" :\"cat1\"\r\n         \r\n         }\r\n     ],\r\n      \"target\" :\"sp90\",\r\n      \"is_encoded\" :true\r\n\r\n   }\r\n         },\r\n          {\r\n          \"is_enabled\": false,\r\n   \"name\": \"sp arithmetic-processor Test\",\r\n  \"type\": \"arithmetic-processor\", \r\n   \"arithmetic-processor\":{\r\n \"expression\" :\"a+b+c\",\r\n      \"target\" :\"D\",\r\n      \"is_replace_missing\" :true\r\n    \r\n   }\r\n         },\r\n         {\r\n          \"is_enabled\": false,\r\n   \"name\": \"sp string-builder-processor Test\",\r\n  \"type\": \"string-builder-processor\", \r\n   \"string-builder-processor\":{\r\n      \"template\" :\"abcdef\",\r\n      \"target\" :\"D\",\r\n      \"is_replace_missing\" :true\r\n   }\r\n         },\r\n           {\r\n          \"is_enabled\": false,\r\n   \"name\": \"sp geo-ip-parser Test\",\r\n  \"type\": \"geo-ip-parser\", \r\n   \"geo-ip-parser\":{\r\n      \"target\" :\"D\",\r\n      \"sources\" :[\"source1\"]\r\n   }\r\n         },\r\n         {\r\n          \"is_enabled\": false,\r\n   \"name\": \"sp lookup-processor Test\",\r\n  \"type\": \"lookup-processor\", \r\n   \"lookup-processor\":{\r\n      \"target\" :\"target1\",\r\n      \"source\" :\"source1\",\r\n      \"lookup_table\" :[\"lookup_table1\"],\r\n      \"default_lookup\":\"default_lookup\"\r\n   }\r\n         }     \r\n         ,\r\n         {\r\n  \"is_enabled\": true,\r\n   \"name\": \"sp trace-id-remapper\",\r\n  \"type\": \"trace-id-remapper\", \r\n   \"trace-id-remapper\":\r\n    {\r\n      \"sources\": [\"message\",\r\n      \"message1\"]}}\r\n      \r\n      \r\n      \r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"pipelines"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "default"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"pipeline\",\r\n    \"description\": \"des1\",\r\n    \"filters\": [\r\n        \"filter:1\",\r\n        \"filter:2\"\r\n    ],\r\n    \"tags\": [\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ],\r\n    \"updatedBy\": \"1\",\r\n    \"type\": \"custom\",\r\n    \"processors\": [\r\n        {\r\n            \"name\": \"sp1\",\r\n            \"source\": \"message\",\r\n            \"type\": \"grok-parser\",\r\n            \"grok\": {\r\n                \"match_rules\": \"grok rules\",\r\n                \"support_rules\": \"grok support rules\"\r\n            },\r\n            \"helper_rules\": [\r\n                \"rule1\",\r\n                \"rule2\"\r\n            ],\r\n            \"is_enabled\": false\r\n        },\r\n        {\r\n            \"name\": \"sp2\",\r\n            \"source\": \"message\",\r\n            \"type\": \"date-remapper\",\r\n            \"is_enabled\": false\r\n        },\r\n        {\r\n            \"name\": \"sp3\",\r\n            \"source\": \"message\",\r\n            \"type\": \"pipeline\",\r\n            \"is_enabled\": true,\r\n            \"pipeline\": {\r\n                \"name\": \"sp3\",\r\n                \"type\": \"custom\",\r\n                \"filters\": [\r\n                    \"filter:1\",\r\n                    \"filter:2\"\r\n                ],\r\n                \"processors\": [\r\n                    {\r\n                        \"name\": \"sp1\",\r\n                        \"source\": \"message\",\r\n                        \"type\": \"grok-parser\",\r\n                        \"grok\": {\r\n                            \"match_rules\": \"grok rules\",\r\n                            \"support_rules\": \"grok support rules\"\r\n                        },\r\n                        \"is_enabled\": false\r\n                    },\r\n                    {\r\n                        \"name\": \"sp2\",\r\n                        \"source\": \"message\",\r\n                        \"type\": \"date-remapper\",\r\n                        \"is_enabled\": false\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    ],\r\n    \"is_enabled\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantId}}",
+										"logs",
+										"config",
+										"pipelines"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Jan 2022 02:08:03 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"name\": \"pipeline\",\n        \"tags\": [\n            \"tag1\",\n            \"tag2\"\n        ],\n        \"description\": \"des1\",\n        \"filters\": [\n            \"filter:1\",\n            \"filter:2\"\n        ],\n        \"type\": \"custom\",\n        \"updatedBy\": \"1\",\n        \"updatedAt\": \"2022-01-30T05:38:03.1143043\",\n        \"processors\": [\n            {\n                \"name\": \"sp1\",\n                \"source\": \"message\",\n                \"type\": \"grok-parser\",\n                \"grok\": {\n                    \"match_rules\": \"grok rules\",\n                    \"support_rules\": \"grok support rules\"\n                },\n                \"is_enabled\": false,\n                \"helper_rules\": [\n                    \"rule1\",\n                    \"rule2\"\n                ]\n            },\n            {\n                \"name\": \"sp2\",\n                \"source\": \"message\",\n                \"type\": \"date-remapper\",\n                \"is_enabled\": false\n            },\n            {\n                \"name\": \"sp3\",\n                \"source\": \"message\",\n                \"type\": \"pipeline\",\n                \"pipeline\": {\n                    \"name\": \"sp3\",\n                    \"filters\": [\n                        \"filter:1\",\n                        \"filter:2\"\n                    ],\n                    \"type\": \"custom\",\n                    \"processors\": [\n                        {\n                            \"name\": \"sp1\",\n                            \"source\": \"message\",\n                            \"type\": \"grok-parser\",\n                            \"grok\": {\n                                \"match_rules\": \"grok rules\",\n                                \"support_rules\": \"grok support rules\"\n                            },\n                            \"is_enabled\": false\n                        },\n                        {\n                            \"name\": \"sp2\",\n                            \"source\": \"message\",\n                            \"type\": \"date-remapper\",\n                            \"is_enabled\": false\n                        }\n                    ],\n                    \"is_enabled\": false,\n                    \"is_readonly\": false\n                },\n                \"is_enabled\": true\n            }\n        ],\n        \"id\": \"61f5f3036457f6379705e417\",\n        \"is_enabled\": true,\n        \"is_readonly\": true\n    },\n    \"status\": 200,\n    \"message\": \"باموفقیت ایجاد شد\"\n}"
+						},
+						{
+							"name": "OK - Create a integration pipeline in library",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "default"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"pipeline\",\r\n    \"description\": \"des1\",\r\n    \"filters\": [\r\n        \"filter:1\",\r\n        \"filter:2\"\r\n    ],\r\n    \"tags\": [\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ],\r\n    \"updatedBy\": \"1\",\r\n    \"type\": \"integration\",\r\n    \"processors\": [\r\n        {\r\n            \"name\": \"sp1\",\r\n            \"source\": \"message\",\r\n            \"type\": \"grok-parser\",\r\n            \"grok\": {\r\n                \"match_rules\": \"grok rules\",\r\n                \"support_rules\": \"grok support rules\"\r\n            },\r\n            \"helper_rules\": [\r\n                \"rule1\",\r\n                \"rule2\"\r\n            ],\r\n            \"is_enabled\": false\r\n        },\r\n        {\r\n            \"name\": \"sp2\",\r\n            \"source\": \"message\",\r\n            \"type\": \"date-remapper\",\r\n            \"is_enabled\": false\r\n        },\r\n        {\r\n            \"name\": \"sp3\",\r\n            \"source\": \"message\",\r\n            \"type\": \"pipeline\",\r\n            \"is_enabled\": true,\r\n            \"pipeline\": {\r\n                \"name\": \"sp3\",\r\n                \"type\": \"custom\",\r\n                \"filters\": [\r\n                    \"filter:1\",\r\n                    \"filter:2\"\r\n                ],\r\n                \"processors\": [\r\n                    {\r\n                        \"name\": \"sp1\",\r\n                        \"source\": \"message\",\r\n                        \"type\": \"grok-parser\",\r\n                        \"grok\": {\r\n                            \"match_rules\": \"grok rules\",\r\n                            \"support_rules\": \"grok support rules\"\r\n                        },\r\n                        \"is_enabled\": false\r\n                    },\r\n                    {\r\n                        \"name\": \"sp2\",\r\n                        \"source\": \"message\",\r\n                        \"type\": \"date-remapper\",\r\n                        \"is_enabled\": false\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    ],\r\n    \"is_enabled\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantShared}}/logs/config/pipelines",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantShared}}",
+										"logs",
+										"config",
+										"pipelines"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Jan 2022 03:21:22 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"name\": \"pipeline\",\n        \"tags\": [\n            \"tag1\",\n            \"tag2\"\n        ],\n        \"description\": \"des1\",\n        \"filters\": [\n            \"filter:1\",\n            \"filter:2\"\n        ],\n        \"type\": \"integration\",\n        \"updatedBy\": \"1\",\n        \"updatedAt\": \"2022-01-30T06:51:22.2825788\",\n        \"processors\": [\n            {\n                \"name\": \"sp1\",\n                \"source\": \"message\",\n                \"type\": \"grok-parser\",\n                \"grok\": {\n                    \"match_rules\": \"grok rules\",\n                    \"support_rules\": \"grok support rules\"\n                },\n                \"is_enabled\": false,\n                \"helper_rules\": [\n                    \"rule1\",\n                    \"rule2\"\n                ]\n            },\n            {\n                \"name\": \"sp2\",\n                \"source\": \"message\",\n                \"type\": \"date-remapper\",\n                \"is_enabled\": false\n            },\n            {\n                \"name\": \"sp3\",\n                \"source\": \"message\",\n                \"type\": \"pipeline\",\n                \"pipeline\": {\n                    \"name\": \"sp3\",\n                    \"filters\": [\n                        \"filter:1\",\n                        \"filter:2\"\n                    ],\n                    \"type\": \"custom\",\n                    \"processors\": [\n                        {\n                            \"name\": \"sp1\",\n                            \"source\": \"message\",\n                            \"type\": \"grok-parser\",\n                            \"grok\": {\n                                \"match_rules\": \"grok rules\",\n                                \"support_rules\": \"grok support rules\"\n                            },\n                            \"is_enabled\": false\n                        },\n                        {\n                            \"name\": \"sp2\",\n                            \"source\": \"message\",\n                            \"type\": \"date-remapper\",\n                            \"is_enabled\": false\n                        }\n                    ],\n                    \"is_enabled\": false,\n                    \"is_readonly\": false\n                },\n                \"is_enabled\": true\n            }\n        ],\n        \"id\": \"61f604325076250b69c13fe7\",\n        \"is_enabled\": true,\n        \"is_readonly\": false\n    },\n    \"status\": 200,\n    \"message\": \"باموفقیت ایجاد شد\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Clone a Pipeline",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "default"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/61f33f5801ff6d5a294082f1/clone",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"pipelines",
+								"61f33f5801ff6d5a294082f1",
+								"clone"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "default"
+									},
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/61f33f5801ff6d5a294082f1/clone",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantId}}",
+										"logs",
+										"config",
+										"pipelines",
+										"61f33f5801ff6d5a294082f1",
+										"clone"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Jan 2022 21:40:03 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"name\": \"pipeline1\",\n        \"type\": \"custom\",\n        \"filter\": {\n            \"query\": \"query test\"\n        },\n        \"updatedBy\": \"1\",\n        \"updatedAt\": \"2022-01-28T04:26:56.877\",\n        \"processors\": [\n            {\n                \"name\": \"sp1\",\n                \"source\": \"message\",\n                \"type\": \"grok-parser\",\n                \"grok\": {\n                    \"match_rules\": \"grok rules\",\n                    \"support_rules\": \"grok support rules\"\n                },\n                \"is_enabled\": false\n            },\n            {\n                \"name\": \"sp2\",\n                \"source\": \"message\",\n                \"type\": \"date-remapper\",\n                \"is_enabled\": false\n            },\n            {\n                \"name\": \"sp3\",\n                \"source\": \"message\",\n                \"type\": \"pipeline\",\n                \"pipeline\": {\n                    \"name\": \"sp3\",\n                    \"type\": \"integration\",\n                    \"filter\": {\n                        \"query\": \"query test\"\n                    },\n                    \"processors\": [\n                        {\n                            \"name\": \"sp1\",\n                            \"source\": \"message\",\n                            \"type\": \"grok-parser\",\n                            \"grok\": {\n                                \"match_rules\": \"grok rules\",\n                                \"support_rules\": \"grok support rules\"\n                            },\n                            \"is_enabled\": false\n                        },\n                        {\n                            \"name\": \"sp2\",\n                            \"source\": \"message\",\n                            \"type\": \"date-remapper\",\n                            \"is_enabled\": false\n                        }\n                    ],\n                    \"is_enabled\": false,\n                    \"is_readonly\": false\n                },\n                \"is_enabled\": true\n            }\n        ],\n        \"is_enabled\": false,\n        \"is_readonly\": true\n    },\n    \"status\": 200,\n    \"message\": \"باموفقیت ایجاد شد\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a Pipeline",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "default"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"pipelineTest1\",\r\n  \"description\": \"des1\",\r\n  \"filters\": [\r\n    \"filter:111\",\r\n    \"filter:2222\"\r\n  ],\r\n  \"tags\": [\r\n    \"tag1\",\r\n    \"tag2\"\r\n  ],\r\n  \"updatedBy\": \"1\",\r\n  \"type\": \"custom\",\r\n  \"processors\": [\r\n      {\r\n  \"is_enabled\": true,\r\n   \"name\": \"sp1\",\r\n  \"type\": \"grok-parser\", \r\n   \"grok_parser\":\r\n    {\r\n      \"source\": \"message\",\r\n      \"grok\": {\r\n        \"match_rules\": \"grok rules\",\r\n        \"support_rules\": \"grok support rules\"\r\n      },\r\n      \"helper_rules\": [\r\n        \"rule1\",\r\n        \"rule2\",\r\n        \"rule3\"\r\n      ],\r\n      \"is_enabled\": false\r\n    }}\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/625ac08a9a614637d519d6c8",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"pipelines",
+								"625ac08a9a614637d519d6c8"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "default"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"pipeline\",\r\n    \"description\": \"des1\",\r\n    \"filters\": [\r\n        \"filter:1\",\r\n        \"filter:2\"\r\n    ],\r\n    \"tags\": [\r\n        \"tag1\",\r\n        \"tag2\",\r\n        \"tag3\"\r\n    ],\r\n    \"updatedBy\": \"1\",\r\n    \"type\": \"custom\",\r\n    \"processors\": [\r\n        {\r\n            \"name\": \"sp1\",\r\n            \"source\": \"message\",\r\n            \"type\": \"grok-parser\",\r\n            \"grok\": {\r\n                \"match_rules\": \"grok rules\",\r\n                \"support_rules\": \"grok support rules\"\r\n            },\r\n            \"helper_rules\": [\r\n                \"rule1\",\r\n                \"rule2\"\r\n            ],\r\n            \"is_enabled\": false\r\n        },\r\n        {\r\n            \"name\": \"sp2\",\r\n            \"source\": \"message\",\r\n            \"type\": \"date-remapper\",\r\n            \"is_enabled\": false\r\n        },\r\n        {\r\n            \"name\": \"sp3\",\r\n            \"source\": \"message\",\r\n            \"type\": \"pipeline\",\r\n            \"is_enabled\": true,\r\n            \"pipeline\": {\r\n                \"name\": \"sp3\",\r\n                \"type\": \"custom\",\r\n                \"filters\": [\r\n                    \"filter:1\",\r\n                    \"filter:2\"\r\n                ],\r\n                \"processors\": [\r\n                    {\r\n                        \"name\": \"sp1\",\r\n                        \"source\": \"message\",\r\n                        \"type\": \"grok-parser\",\r\n                        \"grok\": {\r\n                            \"match_rules\": \"grok rules\",\r\n                            \"support_rules\": \"grok support rules\"\r\n                        },\r\n                        \"is_enabled\": false\r\n                    },\r\n                    {\r\n                        \"name\": \"sp2\",\r\n                        \"source\": \"message\",\r\n                        \"type\": \"date-remapper\",\r\n                        \"is_enabled\": false\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    ],\r\n    \"is_enabled\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/61f5f3036457f6379705e417",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantId}}",
+										"logs",
+										"config",
+										"pipelines",
+										"61f5f3036457f6379705e417"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Jan 2022 02:09:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"name\": \"pipeline\",\n        \"tags\": [\n            \"tag1\",\n            \"tag2\",\n            \"tag3\"\n        ],\n        \"description\": \"des1\",\n        \"filters\": [\n            \"filter:1\",\n            \"filter:2\"\n        ],\n        \"type\": \"custom\",\n        \"updatedBy\": \"1\",\n        \"updatedAt\": \"2022-01-30T05:39:48.257218\",\n        \"processors\": [\n            {\n                \"name\": \"sp1\",\n                \"source\": \"message\",\n                \"type\": \"grok-parser\",\n                \"grok\": {\n                    \"match_rules\": \"grok rules\",\n                    \"support_rules\": \"grok support rules\"\n                },\n                \"is_enabled\": false,\n                \"helper_rules\": [\n                    \"rule1\",\n                    \"rule2\"\n                ]\n            },\n            {\n                \"name\": \"sp2\",\n                \"source\": \"message\",\n                \"type\": \"date-remapper\",\n                \"is_enabled\": false\n            },\n            {\n                \"name\": \"sp3\",\n                \"source\": \"message\",\n                \"type\": \"pipeline\",\n                \"pipeline\": {\n                    \"name\": \"sp3\",\n                    \"filters\": [\n                        \"filter:1\",\n                        \"filter:2\"\n                    ],\n                    \"type\": \"custom\",\n                    \"processors\": [\n                        {\n                            \"name\": \"sp1\",\n                            \"source\": \"message\",\n                            \"type\": \"grok-parser\",\n                            \"grok\": {\n                                \"match_rules\": \"grok rules\",\n                                \"support_rules\": \"grok support rules\"\n                            },\n                            \"is_enabled\": false\n                        },\n                        {\n                            \"name\": \"sp2\",\n                            \"source\": \"message\",\n                            \"type\": \"date-remapper\",\n                            \"is_enabled\": false\n                        }\n                    ],\n                    \"is_enabled\": false,\n                    \"is_readonly\": false\n                },\n                \"is_enabled\": true\n            }\n        ],\n        \"id\": \"61f5f3036457f6379705e417\",\n        \"is_enabled\": false,\n        \"is_readonly\": false\n    },\n    \"status\": 200,\n    \"message\": \"با موفقیت بروز شد\"\n}"
+						},
+						{
+							"name": "OK - Update a integration pipeline in library",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "default"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"pipeline\",\r\n    \"description\": \"des1\",\r\n    \"filters\": [\r\n        \"filter:1\",\r\n        \"filter:2\"\r\n    ],\r\n    \"tags\": [\r\n        \"tag1\",\r\n        \"tag2\"\r\n    ],\r\n    \"updatedBy\": \"1\",\r\n    \"type\": \"integration\",\r\n    \"processors\": [\r\n        {\r\n            \"name\": \"sp1\",\r\n            \"source\": \"message\",\r\n            \"type\": \"grok-parser\",\r\n            \"grok\": {\r\n                \"match_rules\": \"grok rules\",\r\n                \"support_rules\": \"grok support rules\"\r\n            },\r\n            \"helper_rules\": [\r\n                \"rule1\",\r\n                \"rule2\"\r\n            ],\r\n            \"is_enabled\": false\r\n        },\r\n        {\r\n            \"name\": \"sp2\",\r\n            \"source\": \"message\",\r\n            \"type\": \"date-remapper\",\r\n            \"is_enabled\": false\r\n        },\r\n        {\r\n            \"name\": \"sp3\",\r\n            \"source\": \"message\",\r\n            \"type\": \"pipeline\",\r\n            \"is_enabled\": true,\r\n            \"pipeline\": {\r\n                \"name\": \"sp3\",\r\n                \"type\": \"custom\",\r\n                \"filters\": [\r\n                    \"filter:1\",\r\n                    \"filter:2\"\r\n                ],\r\n                \"processors\": [\r\n                    {\r\n                        \"name\": \"sp1\",\r\n                        \"source\": \"message\",\r\n                        \"type\": \"grok-parser\",\r\n                        \"grok\": {\r\n                            \"match_rules\": \"grok rules\",\r\n                            \"support_rules\": \"grok support rules\"\r\n                        },\r\n                        \"is_enabled\": false\r\n                    },\r\n                    {\r\n                        \"name\": \"sp2\",\r\n                        \"source\": \"message\",\r\n                        \"type\": \"date-remapper\",\r\n                        \"is_enabled\": false\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    ],\r\n    \"is_enabled\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantShared}}/logs/config/pipelines/61f604325076250b69c13fe7",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantShared}}",
+										"logs",
+										"config",
+										"pipelines",
+										"61f604325076250b69c13fe7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Jan 2022 03:22:25 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"name\": \"pipeline\",\n        \"tags\": [\n            \"tag1\",\n            \"tag2\"\n        ],\n        \"description\": \"des1\",\n        \"filters\": [\n            \"filter:1\",\n            \"filter:2\"\n        ],\n        \"type\": \"integration\",\n        \"updatedBy\": \"1\",\n        \"updatedAt\": \"2022-01-30T06:52:25.8716659\",\n        \"processors\": [\n            {\n                \"name\": \"sp1\",\n                \"source\": \"message\",\n                \"type\": \"grok-parser\",\n                \"grok\": {\n                    \"match_rules\": \"grok rules\",\n                    \"support_rules\": \"grok support rules\"\n                },\n                \"is_enabled\": false,\n                \"helper_rules\": [\n                    \"rule1\",\n                    \"rule2\"\n                ]\n            },\n            {\n                \"name\": \"sp2\",\n                \"source\": \"message\",\n                \"type\": \"date-remapper\",\n                \"is_enabled\": false\n            },\n            {\n                \"name\": \"sp3\",\n                \"source\": \"message\",\n                \"type\": \"pipeline\",\n                \"pipeline\": {\n                    \"name\": \"sp3\",\n                    \"filters\": [\n                        \"filter:1\",\n                        \"filter:2\"\n                    ],\n                    \"type\": \"custom\",\n                    \"processors\": [\n                        {\n                            \"name\": \"sp1\",\n                            \"source\": \"message\",\n                            \"type\": \"grok-parser\",\n                            \"grok\": {\n                                \"match_rules\": \"grok rules\",\n                                \"support_rules\": \"grok support rules\"\n                            },\n                            \"is_enabled\": false\n                        },\n                        {\n                            \"name\": \"sp2\",\n                            \"source\": \"message\",\n                            \"type\": \"date-remapper\",\n                            \"is_enabled\": false\n                        }\n                    ],\n                    \"is_enabled\": false,\n                    \"is_readonly\": false\n                },\n                \"is_enabled\": true\n            }\n        ],\n        \"id\": \"61f604325076250b69c13fe7\",\n        \"is_enabled\": true,\n        \"is_readonly\": false\n    },\n    \"status\": 200,\n    \"message\": \"با موفقیت بروز شد\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Pipelines",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "default"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"name\": \"pipeline1\",\r\n        \"filter\": {\r\n            \"query\": \"query test\"\r\n        },\r\n        \"updatedBy\": \"1\",\r\n        \"processors\": [\r\n            {\r\n                \"name\": \"sp1\",\r\n                \"source\": \"message\",\r\n                \"type\": \"grok-parser\",\r\n                \"grok\": {\r\n                    \"match_rules\": \"grok rules\",\r\n                    \"support_rules\": \"grok support rules\"\r\n                },\r\n                \"is_enabled\": false\r\n            },\r\n            {\r\n                \"name\": \"sp2\",\r\n                \"source\": \"message\",\r\n                \"type\": \"date-remapper\",\r\n                \"is_enabled\": false\r\n            },\r\n            {\r\n                \"name\": \"sp3\",\r\n                \"source\": \"message\",\r\n                \"type\": \"date-remapper\",\r\n                \"is_enabled\": false\r\n            },\r\n            {\r\n                \"name\": \"sp3\",\r\n                \"source\": \"message\",\r\n                \"type\": \"nested-log-pipeline\",\r\n                \"is_enabled\": false,\r\n                \"pipeline\": {\r\n                    \"name\": \"pipeline1\",\r\n                    \"filter\": {\r\n                        \"query\": \"query test\"\r\n                    },\r\n                    \"updatedBy\": \"1\",\r\n                    \"updatedAt\": \"2022-01-19T00:58:08.678\",\r\n                    \"processors\": [\r\n                        {\r\n                            \"name\": \"sp1\",\r\n                            \"source\": \"message\",\r\n                            \"type\": \"grok-parser\",\r\n                            \"grok\": {\r\n                                \"match_rules\": \"grok rules\",\r\n                                \"support_rules\": \"grok support rules\"\r\n                            },\r\n                            \"is_enabled\": false\r\n                        },\r\n                        {\r\n                            \"name\": \"sp2\",\r\n                            \"source\": \"message\",\r\n                            \"type\": \"date-remapper\",\r\n                            \"is_enabled\": false\r\n                        }\r\n                    ],\r\n                  \r\n                    \"is_enabled\": true,\r\n                    \"is_readonly\": false\r\n                }\r\n            }\r\n        ],\r\n        \"id\": \"61e3800bf0a4ce2e1aea3b5c\",\r\n        \"is_enabled\": true,\r\n        \"is_readonly\": false\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines?deletedId=61e4cc5e1cdd1100a3c97157",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"pipelines"
+							],
+							"query": [
+								{
+									"key": "deletedId",
+									"value": "61e4cc5e1cdd1100a3c97157"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pipelines Order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "default"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pipeline_ids\": [\r\n        \"62003bb3e0669e57b8646b56\",\r\n        \"62003a26e0669e57b8646b55\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines-order",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"pipelines-order"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "default"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"pipeline_ids\": [\r\n            \"61f33f1e01ff6d5a294082ef\",\r\n            \"61f5b3be85fa33669ab1f05e\",\r\n            \"61f33f4801ff6d5a294082f0\",\r\n            \"61f5b42885fa33669ab1f05f\",\r\n            \"61f33f5801ff6d5a294082f1\",\r\n            \"61f33f9a01ff6d5a294082f2\",\r\n            \"61f33fd901ff6d5a294082f3\",\r\n            \"61f362fe3ad7395789cf2d2f\",\r\n            \"61f363123ad7395789cf2d30\",\r\n            \r\n            \"61f5c86e7568097832776f7d\"\r\n        ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines-order",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantId}}",
+										"logs",
+										"config",
+										"pipelines-order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Jan 2022 00:24:59 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"pipeline_ids\": [\n            \"61f33f1e01ff6d5a294082ef\",\n            \"61f5b3be85fa33669ab1f05e\",\n            \"61f33f4801ff6d5a294082f0\",\n            \"61f5b42885fa33669ab1f05f\",\n            \"61f33f5801ff6d5a294082f1\",\n            \"61f33f9a01ff6d5a294082f2\",\n            \"61f33fd901ff6d5a294082f3\",\n            \"61f362fe3ad7395789cf2d2f\",\n            \"61f363123ad7395789cf2d30\",\n            \"61f5c86e7568097832776f7d\"\n        ]\n    },\n    \"status\": 200,\n    \"message\": \"با موفقیت بروز شد\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Pipelines OrderBy order",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines?filter=is_enabled%3A%28true%20OR%20false%29%20%20is_empty%3A%28false%20OR%20true%29%20%20is_readonly%3A%28true%20OR%20false%29%20%20type%3A%28custom%20OR%20integration%29%20%20contains%3A%28grok-parser%20OR%20pipeline%29%20%20last_updated_by%3A1%20%20last_updated_time%3A%28last_day%20OR%20last_three_days%29",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"pipelines"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "is_enabled%3A%28true%20OR%20false%29%20%20is_empty%3A%28false%20OR%20true%29%20%20is_readonly%3A%28true%20OR%20false%29%20%20type%3A%28custom%20OR%20integration%29%20%20contains%3A%28grok-parser%20OR%20pipeline%29%20%20last_updated_by%3A1%20%20last_updated_time%3A%28last_day%20OR%20last_three_days%29"
+								}
+							]
+						},
+						"description": "ytyyry"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "text"
+									},
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantId1}}/logs/config/pipelines?filter=is_enabled%3A%28true%20OR%20false%29%20%20is_empty%3A%28false%20OR%20true%29%20%20is_readonly%3A%28true%20OR%20false%29%20%20type%3A%28custom%20OR%20integration%29%20%20contains%3A%28grok-parser%20OR%20pipeline%29%20%20last_updated_by%3A1%20%20last_updated_time%3A%28last_day%20OR%20last_three_days%29",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantId1}}",
+										"logs",
+										"config",
+										"pipelines"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "is_enabled%3A%28true%20OR%20false%29%20%20is_empty%3A%28false%20OR%20true%29%20%20is_readonly%3A%28true%20OR%20false%29%20%20type%3A%28custom%20OR%20integration%29%20%20contains%3A%28grok-parser%20OR%20pipeline%29%20%20last_updated_by%3A1%20%20last_updated_time%3A%28last_day%20OR%20last_three_days%29"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jan 2022 18:13:10 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"name\": \"pipeline1\",\n            \"type\": \"custom\",\n            \"filter\": {\n                \"query\": \"query test\"\n            },\n            \"updatedBy\": \"2\",\n            \"updatedAt\": \"2022-01-28T04:25:31.302\",\n            \"processors\": [\n                {\n                    \"name\": \"sp1\",\n                    \"source\": \"message\",\n                    \"type\": \"grok-parser\",\n                    \"grok\": {\n                        \"match_rules\": \"grok rules\",\n                        \"support_rules\": \"grok support rules\"\n                    },\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp2\",\n                    \"source\": \"message\",\n                    \"type\": \"date-remapper\",\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp3\",\n                    \"source\": \"message\",\n                    \"type\": \"pipeline\",\n                    \"pipeline\": {\n                        \"name\": \"sp3\",\n                        \"type\": \"integration\",\n                        \"filter\": {\n                            \"query\": \"query test\"\n                        },\n                        \"processors\": [\n                            {\n                                \"name\": \"sp1\",\n                                \"source\": \"message\",\n                                \"type\": \"grok-parser\",\n                                \"grok\": {\n                                    \"match_rules\": \"grok rules\",\n                                    \"support_rules\": \"grok support rules\"\n                                },\n                                \"is_enabled\": false\n                            },\n                            {\n                                \"name\": \"sp2\",\n                                \"source\": \"message\",\n                                \"type\": \"date-remapper\",\n                                \"is_enabled\": false\n                            }\n                        ],\n                        \"is_enabled\": false,\n                        \"is_readonly\": false\n                    },\n                    \"is_enabled\": true\n                }\n            ],\n            \"id\": \"61f33f0301ff6d5a294082ee\",\n            \"is_enabled\": true,\n            \"is_readonly\": false\n        },\n        {\n            \"name\": \"pipeline1\",\n            \"type\": \"custom\",\n            \"filter\": {\n                \"query\": \"query test\"\n            },\n            \"updatedBy\": \"2\",\n            \"updatedAt\": \"2022-01-28T04:25:58.927\",\n            \"processors\": [],\n            \"id\": \"61f33f1e01ff6d5a294082ef\",\n            \"is_enabled\": true,\n            \"is_readonly\": false\n        },\n        {\n            \"name\": \"pipeline1\",\n            \"type\": \"custom\",\n            \"filter\": {\n                \"query\": \"query test\"\n            },\n            \"updatedBy\": \"2\",\n            \"updatedAt\": \"2022-01-28T04:26:40.347\",\n            \"processors\": [\n                {\n                    \"name\": \"sp1\",\n                    \"source\": \"message\",\n                    \"type\": \"grok-parser\",\n                    \"grok\": {\n                        \"match_rules\": \"grok rules\",\n                        \"support_rules\": \"grok support rules\"\n                    },\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp2\",\n                    \"source\": \"message\",\n                    \"type\": \"date-remapper\",\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp3\",\n                    \"source\": \"message\",\n                    \"type\": \"pipeline\",\n                    \"pipeline\": {\n                        \"name\": \"sp3\",\n                        \"type\": \"integration\",\n                        \"filter\": {\n                            \"query\": \"query test\"\n                        },\n                        \"processors\": [\n                            {\n                                \"name\": \"sp1\",\n                                \"source\": \"message\",\n                                \"type\": \"grok-parser\",\n                                \"grok\": {\n                                    \"match_rules\": \"grok rules\",\n                                    \"support_rules\": \"grok support rules\"\n                                },\n                                \"is_enabled\": false\n                            },\n                            {\n                                \"name\": \"sp2\",\n                                \"source\": \"message\",\n                                \"type\": \"date-remapper\",\n                                \"is_enabled\": false\n                            }\n                        ],\n                        \"is_enabled\": false,\n                        \"is_readonly\": false\n                    },\n                    \"is_enabled\": true\n                }\n            ],\n            \"id\": \"61f33f4801ff6d5a294082f0\",\n            \"is_enabled\": false,\n            \"is_readonly\": false\n        },\n        {\n            \"name\": \"pipeline1\",\n            \"type\": \"custom\",\n            \"filter\": {\n                \"query\": \"query test\"\n            },\n            \"updatedBy\": \"2\",\n            \"updatedAt\": \"2022-01-28T04:26:56.877\",\n            \"processors\": [\n                {\n                    \"name\": \"sp1\",\n                    \"source\": \"message\",\n                    \"type\": \"grok-parser\",\n                    \"grok\": {\n                        \"match_rules\": \"grok rules\",\n                        \"support_rules\": \"grok support rules\"\n                    },\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp2\",\n                    \"source\": \"message\",\n                    \"type\": \"date-remapper\",\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp3\",\n                    \"source\": \"message\",\n                    \"type\": \"pipeline\",\n                    \"pipeline\": {\n                        \"name\": \"sp3\",\n                        \"type\": \"integration\",\n                        \"filter\": {\n                            \"query\": \"query test\"\n                        },\n                        \"processors\": [\n                            {\n                                \"name\": \"sp1\",\n                                \"source\": \"message\",\n                                \"type\": \"grok-parser\",\n                                \"grok\": {\n                                    \"match_rules\": \"grok rules\",\n                                    \"support_rules\": \"grok support rules\"\n                                },\n                                \"is_enabled\": false\n                            },\n                            {\n                                \"name\": \"sp2\",\n                                \"source\": \"message\",\n                                \"type\": \"date-remapper\",\n                                \"is_enabled\": false\n                            }\n                        ],\n                        \"is_enabled\": false,\n                        \"is_readonly\": false\n                    },\n                    \"is_enabled\": true\n                }\n            ],\n            \"id\": \"61f33f5801ff6d5a294082f1\",\n            \"is_enabled\": true,\n            \"is_readonly\": true\n        },\n        {\n            \"name\": \"pipeline1\",\n            \"type\": \"integration\",\n            \"filter\": {\n                \"query\": \"query test\"\n            },\n            \"updatedBy\": \"2\",\n            \"updatedAt\": \"2022-01-28T04:28:02.156\",\n            \"processors\": [\n                {\n                    \"name\": \"sp1\",\n                    \"source\": \"message\",\n                    \"type\": \"grok-parser\",\n                    \"grok\": {\n                        \"match_rules\": \"grok rules\",\n                        \"support_rules\": \"grok support rules\"\n                    },\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp2\",\n                    \"source\": \"message\",\n                    \"type\": \"date-remapper\",\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp3\",\n                    \"source\": \"message\",\n                    \"type\": \"pipeline\",\n                    \"pipeline\": {\n                        \"name\": \"sp3\",\n                        \"type\": \"integration\",\n                        \"filter\": {\n                            \"query\": \"query test\"\n                        },\n                        \"processors\": [\n                            {\n                                \"name\": \"sp1\",\n                                \"source\": \"message\",\n                                \"type\": \"grok-parser\",\n                                \"grok\": {\n                                    \"match_rules\": \"grok rules\",\n                                    \"support_rules\": \"grok support rules\"\n                                },\n                                \"is_enabled\": false\n                            },\n                            {\n                                \"name\": \"sp2\",\n                                \"source\": \"message\",\n                                \"type\": \"date-remapper\",\n                                \"is_enabled\": false\n                            }\n                        ],\n                        \"is_enabled\": false,\n                        \"is_readonly\": false\n                    },\n                    \"is_enabled\": true\n                }\n            ],\n            \"id\": \"61f33f9a01ff6d5a294082f2\",\n            \"is_enabled\": true,\n            \"is_readonly\": true\n        },\n        {\n            \"name\": \"pipeline1\",\n            \"type\": \"custom\",\n            \"filter\": {\n                \"query\": \"query test\"\n            },\n            \"updatedBy\": \"2\",\n            \"updatedAt\": \"2022-01-28T04:29:05.644\",\n            \"processors\": [\n                {\n                    \"name\": \"sp1\",\n                    \"source\": \"message\",\n                    \"type\": \"grok-parser\",\n                    \"grok\": {\n                        \"match_rules\": \"grok rules\",\n                        \"support_rules\": \"grok support rules\"\n                    },\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp2\",\n                    \"source\": \"message\",\n                    \"type\": \"date-remapper\",\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp3\",\n                    \"source\": \"message\",\n                    \"type\": \"pipeline\",\n                    \"pipeline\": {\n                        \"name\": \"sp3\",\n                        \"type\": \"integration\",\n                        \"filter\": {\n                            \"query\": \"query test\"\n                        },\n                        \"processors\": [\n                            {\n                                \"name\": \"sp1\",\n                                \"source\": \"message\",\n                                \"type\": \"grok-parser\",\n                                \"grok\": {\n                                    \"match_rules\": \"grok rules\",\n                                    \"support_rules\": \"grok support rules\"\n                                },\n                                \"is_enabled\": false\n                            },\n                            {\n                                \"name\": \"sp2\",\n                                \"source\": \"message\",\n                                \"type\": \"date-remapper\",\n                                \"is_enabled\": false\n                            }\n                        ],\n                        \"is_enabled\": false,\n                        \"is_readonly\": false\n                    },\n                    \"is_enabled\": true\n                }\n            ],\n            \"id\": \"61f33fd901ff6d5a294082f3\",\n            \"is_enabled\": false,\n            \"is_readonly\": true\n        },\n        {\n            \"name\": \"pipeline1\",\n            \"type\": \"custom\",\n            \"filter\": {\n                \"query\": \"query test\"\n            },\n            \"updatedBy\": \"2\",\n            \"updatedAt\": \"2022-01-28T06:59:01.273\",\n            \"processors\": [\n                {\n                    \"name\": \"sp1\",\n                    \"source\": \"message\",\n                    \"type\": \"grok-parser\",\n                    \"grok\": {\n                        \"match_rules\": \"grok rules\",\n                        \"support_rules\": \"grok support rules\"\n                    },\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp2\",\n                    \"source\": \"message\",\n                    \"type\": \"date-remapper\",\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp3\",\n                    \"source\": \"message\",\n                    \"type\": \"pipeline\",\n                    \"pipeline\": {\n                        \"name\": \"sp3\",\n                        \"type\": \"integration\",\n                        \"filter\": {\n                            \"query\": \"query test\"\n                        },\n                        \"processors\": [\n                            {\n                                \"name\": \"sp1\",\n                                \"source\": \"message\",\n                                \"type\": \"grok-parser\",\n                                \"grok\": {\n                                    \"match_rules\": \"grok rules\",\n                                    \"support_rules\": \"grok support rules\"\n                                },\n                                \"is_enabled\": false\n                            },\n                            {\n                                \"name\": \"sp2\",\n                                \"source\": \"message\",\n                                \"type\": \"date-remapper\",\n                                \"is_enabled\": false\n                            }\n                        ],\n                        \"is_enabled\": false,\n                        \"is_readonly\": false\n                    },\n                    \"is_enabled\": true\n                }\n            ],\n            \"id\": \"61f362fe3ad7395789cf2d2f\",\n            \"is_enabled\": false,\n            \"is_readonly\": true\n        },\n        {\n            \"name\": \"pipeline1\",\n            \"type\": \"custom\",\n            \"filter\": {\n                \"query\": \"query test\"\n            },\n            \"updatedBy\": \"2\",\n            \"updatedAt\": \"2022-01-28T06:59:22.36\",\n            \"processors\": [\n                {\n                    \"name\": \"sp1\",\n                    \"source\": \"message\",\n                    \"type\": \"grok-parser\",\n                    \"grok\": {\n                        \"match_rules\": \"grok rules\",\n                        \"support_rules\": \"grok support rules\"\n                    },\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp2\",\n                    \"source\": \"message\",\n                    \"type\": \"date-remapper\",\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp3\",\n                    \"source\": \"message\",\n                    \"type\": \"pipeline\",\n                    \"pipeline\": {\n                        \"name\": \"sp3\",\n                        \"type\": \"integration\",\n                        \"filter\": {\n                            \"query\": \"query test\"\n                        },\n                        \"processors\": [\n                            {\n                                \"name\": \"sp1\",\n                                \"source\": \"message\",\n                                \"type\": \"grok-parser\",\n                                \"grok\": {\n                                    \"match_rules\": \"grok rules\",\n                                    \"support_rules\": \"grok support rules\"\n                                },\n                                \"is_enabled\": false\n                            },\n                            {\n                                \"name\": \"sp2\",\n                                \"source\": \"message\",\n                                \"type\": \"date-remapper\",\n                                \"is_enabled\": false\n                            }\n                        ],\n                        \"is_enabled\": false,\n                        \"is_readonly\": false\n                    },\n                    \"is_enabled\": true\n                }\n            ],\n            \"id\": \"61f363123ad7395789cf2d30\",\n            \"is_enabled\": false,\n            \"is_readonly\": true\n        }\n    ],\n    \"status\": 200,\n    \"message\": \"با موفقیت خوانده شد\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Pipelines in Library OrderBy name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantShared}}/logs/config/pipelines/library?filter=",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantShared}}",
+								"logs",
+								"config",
+								"pipelines",
+								"library"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "text"
+									},
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantShared}}/logs/config/pipelines/library?filter=",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantShared}}",
+										"logs",
+										"config",
+										"pipelines",
+										"library"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Jan 2022 03:24:08 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"name\": \"pipeline\",\n            \"tags\": [\n                \"tag1\",\n                \"tag2\"\n            ],\n            \"description\": \"des1\",\n            \"filters\": [\n                \"filter:1\",\n                \"filter:2\"\n            ],\n            \"type\": \"integration\",\n            \"updatedBy\": \"1\",\n            \"updatedAt\": \"2022-01-30T06:52:25.871\",\n            \"processors\": [\n                {\n                    \"name\": \"sp1\",\n                    \"source\": \"message\",\n                    \"type\": \"grok-parser\",\n                    \"grok\": {\n                        \"match_rules\": \"grok rules\",\n                        \"support_rules\": \"grok support rules\"\n                    },\n                    \"is_enabled\": false,\n                    \"helper_rules\": [\n                        \"rule1\",\n                        \"rule2\"\n                    ]\n                },\n                {\n                    \"name\": \"sp2\",\n                    \"source\": \"message\",\n                    \"type\": \"date-remapper\",\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp3\",\n                    \"source\": \"message\",\n                    \"type\": \"pipeline\",\n                    \"pipeline\": {\n                        \"name\": \"sp3\",\n                        \"filters\": [\n                            \"filter:1\",\n                            \"filter:2\"\n                        ],\n                        \"type\": \"custom\",\n                        \"processors\": [\n                            {\n                                \"name\": \"sp1\",\n                                \"source\": \"message\",\n                                \"type\": \"grok-parser\",\n                                \"grok\": {\n                                    \"match_rules\": \"grok rules\",\n                                    \"support_rules\": \"grok support rules\"\n                                },\n                                \"is_enabled\": false\n                            },\n                            {\n                                \"name\": \"sp2\",\n                                \"source\": \"message\",\n                                \"type\": \"date-remapper\",\n                                \"is_enabled\": false\n                            }\n                        ],\n                        \"is_enabled\": false,\n                        \"is_readonly\": false\n                    },\n                    \"is_enabled\": true\n                }\n            ],\n            \"id\": \"61f604325076250b69c13fe7\",\n            \"is_enabled\": true,\n            \"is_readonly\": false\n        },\n        {\n            \"name\": \"pipeline1\",\n            \"type\": \"integration\",\n            \"updatedBy\": \"1\",\n            \"updatedAt\": \"2022-01-30T02:08:19.821\",\n            \"processors\": [\n                {\n                    \"name\": \"sp1\",\n                    \"source\": \"message\",\n                    \"type\": \"grok-parser\",\n                    \"grok\": {\n                        \"match_rules\": \"grok rules\",\n                        \"support_rules\": \"grok support rules\"\n                    },\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp2\",\n                    \"source\": \"message\",\n                    \"type\": \"date-remapper\",\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp3\",\n                    \"source\": \"message\",\n                    \"type\": \"pipeline\",\n                    \"pipeline\": {\n                        \"name\": \"sp3\",\n                        \"type\": \"integration\",\n                        \"processors\": [\n                            {\n                                \"name\": \"sp1\",\n                                \"source\": \"message\",\n                                \"type\": \"grok-parser\",\n                                \"grok\": {\n                                    \"match_rules\": \"grok rules\",\n                                    \"support_rules\": \"grok support rules\"\n                                },\n                                \"is_enabled\": false\n                            },\n                            {\n                                \"name\": \"sp2\",\n                                \"source\": \"message\",\n                                \"type\": \"date-remapper\",\n                                \"is_enabled\": false\n                            }\n                        ],\n                        \"is_enabled\": false,\n                        \"is_readonly\": false\n                    },\n                    \"is_enabled\": true\n                }\n            ],\n            \"id\": \"61f375a06b175807129a80b0\",\n            \"is_enabled\": false,\n            \"is_readonly\": true\n        },\n        {\n            \"name\": \"pipeline1\",\n            \"type\": \"integration\",\n            \"updatedBy\": \"1\",\n            \"updatedAt\": \"2022-01-28T08:18:36.388\",\n            \"processors\": [\n                {\n                    \"name\": \"sp1\",\n                    \"source\": \"message\",\n                    \"type\": \"grok-parser\",\n                    \"grok\": {\n                        \"match_rules\": \"grok rules\",\n                        \"support_rules\": \"grok support rules\"\n                    },\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp2\",\n                    \"source\": \"message\",\n                    \"type\": \"date-remapper\",\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp3\",\n                    \"source\": \"message\",\n                    \"type\": \"pipeline\",\n                    \"pipeline\": {\n                        \"name\": \"sp3\",\n                        \"type\": \"integration\",\n                        \"processors\": [\n                            {\n                                \"name\": \"sp1\",\n                                \"source\": \"message\",\n                                \"type\": \"grok-parser\",\n                                \"grok\": {\n                                    \"match_rules\": \"grok rules\",\n                                    \"support_rules\": \"grok support rules\"\n                                },\n                                \"is_enabled\": false\n                            },\n                            {\n                                \"name\": \"sp2\",\n                                \"source\": \"message\",\n                                \"type\": \"date-remapper\",\n                                \"is_enabled\": false\n                            }\n                        ],\n                        \"is_enabled\": false,\n                        \"is_readonly\": false\n                    },\n                    \"is_enabled\": true\n                }\n            ],\n            \"id\": \"61f375a46b175807129a80b1\",\n            \"is_enabled\": false,\n            \"is_readonly\": true\n        },\n        {\n            \"name\": \"pipeline1\",\n            \"type\": \"integration\",\n            \"updatedBy\": \"1\",\n            \"updatedAt\": \"2022-01-28T08:18:37.299\",\n            \"processors\": [\n                {\n                    \"name\": \"sp1\",\n                    \"source\": \"message\",\n                    \"type\": \"grok-parser\",\n                    \"grok\": {\n                        \"match_rules\": \"grok rules\",\n                        \"support_rules\": \"grok support rules\"\n                    },\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp2\",\n                    \"source\": \"message\",\n                    \"type\": \"date-remapper\",\n                    \"is_enabled\": false\n                },\n                {\n                    \"name\": \"sp3\",\n                    \"source\": \"message\",\n                    \"type\": \"pipeline\",\n                    \"pipeline\": {\n                        \"name\": \"sp3\",\n                        \"type\": \"integration\",\n                        \"processors\": [\n                            {\n                                \"name\": \"sp1\",\n                                \"source\": \"message\",\n                                \"type\": \"grok-parser\",\n                                \"grok\": {\n                                    \"match_rules\": \"grok rules\",\n                                    \"support_rules\": \"grok support rules\"\n                                },\n                                \"is_enabled\": false\n                            },\n                            {\n                                \"name\": \"sp2\",\n                                \"source\": \"message\",\n                                \"type\": \"date-remapper\",\n                                \"is_enabled\": false\n                            }\n                        ],\n                        \"is_enabled\": false,\n                        \"is_readonly\": false\n                    },\n                    \"is_enabled\": true\n                }\n            ],\n            \"id\": \"61f375a56b175807129a80b2\",\n            \"is_enabled\": false,\n            \"is_readonly\": true\n        }\n    ],\n    \"status\": 200,\n    \"message\": \"با موفقیت خوانده شد\"\n}"
+						},
+						{
+							"name": "Get All Pipelines in Library OrderBy name",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "text"
+									},
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantShared}}/logs/config/pipelines?filter=",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantShared}}",
+										"logs",
+										"config",
+										"pipelines"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 05 Apr 2022 19:05:42 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [],\n    \"status\": 200,\n    \"message\": \"Successfully read\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a Pipeline",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "default"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/625ae11a5abad1120a35749d",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"pipelines",
+								"625ae11a5abad1120a35749d"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "default"
+									},
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/61f33f0301ff6d5a294082ee",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantId}}",
+										"logs",
+										"config",
+										"pipelines",
+										"61f33f0301ff6d5a294082ee"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Jan 2022 00:19:29 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"name\": \"pipeline1\",\n        \"type\": \"integration\",\n        \"filter\": {\n            \"query\": \"query test\"\n        },\n        \"updatedBy\": \"1\",\n        \"updatedAt\": \"2022-01-30T02:07:30.507\",\n        \"processors\": [\n            {\n                \"name\": \"sp1\",\n                \"source\": \"message\",\n                \"type\": \"grok-parser\",\n                \"grok\": {\n                    \"match_rules\": \"grok rules\",\n                    \"support_rules\": \"grok support rules\"\n                },\n                \"is_enabled\": false\n            },\n            {\n                \"name\": \"sp2\",\n                \"source\": \"message\",\n                \"type\": \"date-remapper\",\n                \"is_enabled\": false\n            },\n            {\n                \"name\": \"sp3\",\n                \"source\": \"message\",\n                \"type\": \"pipeline\",\n                \"pipeline\": {\n                    \"name\": \"sp3\",\n                    \"type\": \"integration\",\n                    \"filter\": {\n                        \"query\": \"query test\"\n                    },\n                    \"processors\": [\n                        {\n                            \"name\": \"sp1\",\n                            \"source\": \"message\",\n                            \"type\": \"grok-parser\",\n                            \"grok\": {\n                                \"match_rules\": \"grok rules\",\n                                \"support_rules\": \"grok support rules\"\n                            },\n                            \"is_enabled\": false\n                        },\n                        {\n                            \"name\": \"sp2\",\n                            \"source\": \"message\",\n                            \"type\": \"date-remapper\",\n                            \"is_enabled\": false\n                        }\n                    ],\n                    \"is_enabled\": false,\n                    \"is_readonly\": false\n                },\n                \"is_enabled\": true\n            }\n        ],\n        \"id\": \"61f33f0301ff6d5a294082ee\",\n        \"is_enabled\": false,\n        \"is_readonly\": true\n    },\n    \"status\": 200,\n    \"message\": \"با موفقیت خوانده شد\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Pipelines Core Filters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "default"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/cores",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"pipelines",
+								"cores"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "default"
+									},
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/cores",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantId}}",
+										"logs",
+										"config",
+										"pipelines",
+										"cores"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Jan 2022 02:11:29 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"name\": \"فعال(Is Enabled)\",\n            \"code\": \"is_enabled\",\n            \"categoryElements\": [\n                {\n                    \"name\": \"باشد(True)\",\n                    \"code\": \"true\"\n                },\n                {\n                    \"name\": \"نباشد(False)\",\n                    \"code\": \"false\"\n                }\n            ]\n        },\n        {\n            \"name\": \"خالی(Is Empty)\",\n            \"code\": \"is_empty\",\n            \"categoryElements\": [\n                {\n                    \"name\": \"باشد(True)\",\n                    \"code\": \"true\"\n                },\n                {\n                    \"name\": \"نباشد(False)\",\n                    \"code\": \"false\"\n                }\n            ]\n        },\n        {\n            \"name\": \"فقط خواندنی(Is Readonly)\",\n            \"code\": \"is_readonly\",\n            \"categoryElements\": [\n                {\n                    \"name\": \"باشد(True)\",\n                    \"code\": \"true\"\n                },\n                {\n                    \"name\": \"نباشد(False)\",\n                    \"code\": \"false\"\n                }\n            ]\n        },\n        {\n            \"name\": \"نوع(Type)\",\n            \"code\": \"type\",\n            \"categoryElements\": [\n                {\n                    \"name\": \"پایپ لاین یکپارچه سازی\",\n                    \"code\": \"integration\"\n                },\n                {\n                    \"name\": \"پایپ لاین سفارشی\",\n                    \"code\": \"custom\"\n                }\n            ]\n        },\n        {\n            \"name\": \"آخرین تاریخ بروزرسانی(Last Updated Time)\",\n            \"code\": \"last_updated_time\",\n            \"categoryElements\": [\n                {\n                    \"name\": \"24 ساعت گذشته(Last 24h)\",\n                    \"code\": \"last_day\"\n                },\n                {\n                    \"name\": \"72 ساعت گذشته(Last 72h)\",\n                    \"code\": \"last_three_days\"\n                },\n                {\n                    \"name\": \"هفته گذشته(Last Week)\",\n                    \"code\": \"last_week\"\n                },\n                {\n                    \"name\": \"ماه گذشته(Last Month)\",\n                    \"code\": \"last_month\"\n                },\n                {\n                    \"name\": \"سال گذشته(Last Year)\",\n                    \"code\": \"last_year\"\n                }\n            ]\n        },\n        {\n            \"name\": \"آخرین تغییرات توسط(Last Updated By)\",\n            \"code\": \"last_updated_by\",\n            \"categoryElements\": [\n                {\n                    \"name\": \"فرهاد\",\n                    \"code\": \"1\"\n                }\n            ]\n        },\n        {\n            \"name\": \"شامل(Contains)\",\n            \"code\": \"contains\",\n            \"categoryElements\": [\n                {\n                    \"name\": \"گروک پارزر\",\n                    \"code\": \"grok-parser\"\n                },\n                {\n                    \"name\": \"نگاشت تاریخ\",\n                    \"code\": \"date-remapper\"\n                },\n                {\n                    \"name\": \"پایپ لاین تودروتو\",\n                    \"code\": \"pipeline\"\n                }\n            ]\n        }\n    ],\n    \"status\": 200,\n    \"message\": \"با موفقیت خوانده شد\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Pipelines processors types",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "default"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/processors-type",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"pipelines",
+								"processors-type"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "default"
+									},
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/processors-type",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantId}}",
+										"logs",
+										"config",
+										"pipelines",
+										"processors-type"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Jan 2022 03:29:11 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"code\": \"\",\n        \"categoryElements\": [\n            {\n                \"code\": \"grok-parser\"\n            },\n            {\n                \"code\": \"date-remapper\"\n            },\n            {\n                \"code\": \"pipeline\"\n            }\n        ],\n        \"is_dynamic\": false\n    },\n    \"status\": 200,\n    \"message\": \"با موفقیت خوانده شد\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Pipelines Order",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "default"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines-order",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"pipelines-order"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "default"
+									},
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines-order",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantId}}",
+										"logs",
+										"config",
+										"pipelines-order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Jan 2022 00:23:20 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"pipeline_ids\": [\n            \"61f33f0301ff6d5a294082ee\",\n            \"61f33f1e01ff6d5a294082ef\",\n            \"61f33f4801ff6d5a294082f0\",\n            \"61f5b42885fa33669ab1f05f\",\n            \"61f33f5801ff6d5a294082f1\",\n            \"61f33f9a01ff6d5a294082f2\",\n            \"61f33fd901ff6d5a294082f3\",\n            \"61f362fe3ad7395789cf2d2f\",\n            \"61f363123ad7395789cf2d30\",\n            \"61f5b3be85fa33669ab1f05e\",\n            \"61f5c86e7568097832776f7d\"\n        ]\n    },\n    \"status\": 200,\n    \"message\": \"با موفقیت خوانده شد\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a Pipeline",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/62003a26e0669e57b8646b55",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"pipelines",
+								"62003a26e0669e57b8646b55"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{lang}}",
+										"type": "text"
+									},
+									{
+										"key": "user_id",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/61f33f0301ff6d5a294082ee",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tenant",
+										"{{tenantId}}",
+										"logs",
+										"config",
+										"pipelines",
+										"61f33f0301ff6d5a294082ee"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Jan 2022 00:23:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"message\": \"با موفقیت حذف شد\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete All Pipelines",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"pipelines"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Logs Metrics Pipelines",
+			"item": [
+				{
+					"name": "Create a LogMetric",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\":\"metric-13\" ,\n\"type\":\"logs_metrics\",\n\"attributes\":{\n    \"compute\":{\n        \"aggregation_type\":\"distribution\",\n        \"path\":\"path1\"\n    },\n    \"filter\":{\n        \"query\":\"query1\"\n    },\n    \"group_by\":[{\n        \"tag_name\":\"tag1\",\n        \"path\":\"group_by path\"\n    }\n\n    ]\n}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/metrics",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"metrics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all log-based metrics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/metrics",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"metrics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a log-based metric",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/metrics/6269630ad7b8301494765cde",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"metrics",
+								"6269630ad7b8301494765cde"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a log-based metric",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/metrics/6269630ad7b8301494765cde",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"metrics",
+								"6269630ad7b8301494765cde"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a LogMetric",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\":\"metric-15\" ,\n\"type\":\"logs_metrics\",\n\"attributes\":{\n    \"compute\":{\n        \"aggregation_type\":\"distribution\",\n        \"path\":\"new path1\"\n    },\n    \"filter\":{\n        \"query\":\"new query1\"\n    },\n    \"group_by\":[{\n        \"tag_name\":\"new tag1\",\n        \"path\":\"group_by path\"\n    }\n\n    ]\n}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/metrics/626bfebdc8731b6cc4649c67",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"metrics",
+								"626bfebdc8731b6cc4649c67"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Logs Indexes Pipelines",
+			"item": [
+				{
+					"name": "Create a Log Index",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"au-index-1\",\n    \"filter\":{\n        \"query\":\"filter index 20\"\n    },\n    \"daily_limit\":10000,\n    \"num_retention_days\":300 ,\n    \"is_rate_limited\": true ,\n    \"exclusion_filters\":[{\n        \"name\":\"ex filter 1\",\n        \"filter\":{\n            \"sample_rate\": 100,\n            \"sample_rate_type\":\"Trace Id\"\n            \n        },\n        \"is_enabled\":false\n    }]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/indexes",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"indexes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Log Indexes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/indexes?filter",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"indexes"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Log Index",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config//index/index2",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"",
+								"index",
+								"index2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Log Index",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"index1234\",\n    \"filter\":{\n        \"query\":\"filter index 1234\"\n    },\n    \"daily_limit\":10000,\n    \"num_retention_days\":300 ,\n    \"is_rate_limited\": true ,\n    \"exclusion_filters\":[{\n        \"name\":\"ex filter 1\",\n        \"filter\":{\n            \"sample_rate\": 102\n        },\n        \"is_enabled\":false\n    }]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/indexes/index1234",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"indexes",
+								"index1234"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Indexes Order",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/indexes-order",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"indexes-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Indexes Order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"index_names\": \n [\n            \"index2\",\n            \"index1\",\n            \"index0\"\n        ]\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/indexes-order",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"indexes-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get LogIndex ExclusionFilter Filter Sample Rate Type",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/indexes/sample-rate-type",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"indexes",
+								"sample-rate-type"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Logs Archives Pipelines",
+			"item": []
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "default"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\" : \"1\",\r\n  \"name\" : \"farhad\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{usersite}}:{{userport}}/api/v1/tenant/{{tenantId}}/users",
+							"protocol": "http",
+							"host": [
+								"{{usersite}}"
+							],
+							"port": "{{userport}}",
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{usersite}}:{{userport}}/api/v1/tenant/{{tenantId}}/users",
+							"protocol": "http",
+							"host": [
+								"{{usersite}}"
+							],
+							"port": "{{userport}}",
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Standard Attributes",
+			"item": [
+				{
+					"name": "Create Standard Attribute",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attribute\":\"attribute3\",\n    \"type\":\"boolean\",\n    \"description\":\"attribute3 desc\",\n    \"remapping\":\"attribute3 remapper\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/standardattrbutes",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"standardattrbutes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update standard attribute ",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attribute\":\"attribute1\",\n    \"type\":\"String\",\n    \"description\":\"attribute1234 desc\",\n    \"remapping\":\"attribute1234 remapper\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/standardattributes/62584238905a941de5593c3f",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"standardattributes",
+								"62584238905a941de5593c3f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Standard Attribute",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/standardattributes/62584238905a941de5593c3f",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"standardattributes",
+								"62584238905a941de5593c3f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET All Standard Attributes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/standardattributes?filter",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"standardattributes"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete One Standard Attribute",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/standardattributes/62584238905a941de5593c3f",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"standardattributes",
+								"62584238905a941de5593c3f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Standard Attribute Types",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{lang}}",
+								"type": "text"
+							},
+							{
+								"key": "user_id",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/standardattributes/attribute-type",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tenant",
+								"{{tenantId}}",
+								"logs",
+								"config",
+								"standardattributes",
+								"attribute-type"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "logsite",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "logport",
+			"value": "8081",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://{{logsite}}:{{logport}}",
+			"type": "string"
+		},
+		{
+			"key": "lang",
+			"value": "en",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "tenantId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "tenantShared",
+			"value": "shared",
+			"type": "string"
+		}
+	]
+}

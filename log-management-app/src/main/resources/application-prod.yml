@@ -1,0 +1,19 @@
+server:
+  port: 80
+
+springdoc:
+  api-docs:
+    path: /log-management/api-docs
+  swagger-ui:
+    path: /log-management/open-api
+    operationsSorter: method
+
+spring:
+  messages:
+    encoding: UTF-8
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    mongodb:
+      database: logzi
+      url: mongodb://mongo-1-service:27017,mongo-2-service:27017,mongo-3-service:27017/

@@ -1,0 +1,22 @@
+server:
+  port: 8081
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /open-api
+    operationsSorter: method
+
+spring:
+  messages:
+    encoding: UTF-8
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    mongodb:
+      database: logzi
+      url: mongodb://mongo1:30001,mongo2:30002,mongo3:30003/
+
+
+
