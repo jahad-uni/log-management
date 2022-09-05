@@ -35,16 +35,12 @@ public class LogMetricPipelineController {
     @GetMapping("/metrics")
     public ResponseEntity<SuccessResponse<List<LogMetricPipeline>>>
     getAllLogMetrics(@PathVariable final String tenantId,
-                     @RequestHeader("user_id") final String userId
-    ) {
+                     @RequestHeader("user_id") final String userId) {
 
-        List<LogMetricPipeline> logMetricPipelineList;
-        List<LogMetricPipelineDto> logMetricPipelineDtoList;
-
-        logMetricPipelineDtoList = this.logMetricPipelineService
+        List<LogMetricPipelineDto> logMetricPipelineDtoList = this.logMetricPipelineService
                 .getAllLogMetrics(tenantId);
 
-        logMetricPipelineList = this.logMetricPipelineMapper
+        List<LogMetricPipeline> logMetricPipelineList = this.logMetricPipelineMapper
                 .fromLogMetricPipelineDtoList(logMetricPipelineDtoList);
 
         return ResponseEntity.ok(new SuccessResponse<>(logMetricPipelineList,
@@ -103,7 +99,7 @@ public class LogMetricPipelineController {
                 .toLogMetricPipelineDto(tenantId, userId, id, logMetricPipelineInput);
 
         logMetricPipelineDto = this.logMetricPipelineService
-                .updateLogMetric(tenantId,id ,logMetricPipelineDto);
+                .updateLogMetric(tenantId, id, logMetricPipelineDto);
 
         var logMetricPipelineApiModel = logMetricPipelineMapper
                 .fromLogMetricPipelineDto(logMetricPipelineDto);
