@@ -10,6 +10,8 @@ import ai.logzi.core.management.logmanagement.service.validation.dto.FieldErrorD
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class GrokParserProcessorValidation implements LogPipelineProcessorValidation {
@@ -18,7 +20,7 @@ public class GrokParserProcessorValidation implements LogPipelineProcessorValida
     private final LogPipelineValidationUtil logPipelineValidationUtil;
 
     @Override
-    public LogPipelineProcessorDto validate(final LogPipelineProcessorDto logPipelineProcessorDto) {
+    public List<FieldErrorDto> validate(final LogPipelineProcessorDto logPipelineProcessorDto) {
 
 //        var grokParserProcessorDto = this
 //                .logPipelineProcessorDtoMapper
@@ -48,10 +50,6 @@ public class GrokParserProcessorValidation implements LogPipelineProcessorValida
             allErrors.add(error);
         }
 
-//        var out = this.logPipelineProcessorDtoMapper
-//                .fromGrokParser(grokParserProcessorDto);
-        var out = logPipelineProcessorDto;
-        out.setFieldErrorDtoList(allErrors);
-        return out;
+        return allErrors;
     }
 }

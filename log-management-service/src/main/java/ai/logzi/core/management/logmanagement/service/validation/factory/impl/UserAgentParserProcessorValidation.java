@@ -9,6 +9,8 @@ import ai.logzi.core.management.logmanagement.service.validation.dto.FieldErrorD
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 public class UserAgentParserProcessorValidation implements LogPipelineProcessorValidation {
@@ -16,7 +18,7 @@ public class UserAgentParserProcessorValidation implements LogPipelineProcessorV
     private final LogPipelineValidationUtil logPipelineValidationUtil;
 
     @Override
-    public LogPipelineProcessorDto validate(final LogPipelineProcessorDto logPipelineProcessorDto) {
+    public List<FieldErrorDto> validate(final LogPipelineProcessorDto logPipelineProcessorDto) {
 
 
         var allErrors = this.logPipelineValidationUtil
@@ -37,9 +39,7 @@ public class UserAgentParserProcessorValidation implements LogPipelineProcessorV
             allErrors.add(error);
         }
 
-
-        logPipelineProcessorDto.setFieldErrorDtoList(allErrors);
-        return logPipelineProcessorDto;
+        return allErrors;
 
     }
 }

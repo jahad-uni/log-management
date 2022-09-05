@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class AttributeReMapperProcessorValidation implements LogPipelineProcessorValidation {
@@ -20,7 +22,7 @@ public class AttributeReMapperProcessorValidation implements LogPipelineProcesso
 
 
     @Override
-    public LogPipelineProcessorDto validate(LogPipelineProcessorDto logPipelineProcessorDto) {
+    public List<FieldErrorDto> validate(LogPipelineProcessorDto logPipelineProcessorDto) {
 
 
         var allErrors = this
@@ -110,8 +112,6 @@ public class AttributeReMapperProcessorValidation implements LogPipelineProcesso
             allErrors.add(error);
         }
 
-        logPipelineProcessorDto.setFieldErrorDtoList(allErrors);
-
-        return logPipelineProcessorDto;
+        return allErrors;
     }
 }

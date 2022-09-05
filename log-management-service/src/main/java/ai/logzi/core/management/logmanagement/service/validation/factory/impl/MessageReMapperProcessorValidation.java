@@ -9,6 +9,8 @@ import ai.logzi.core.management.logmanagement.service.validation.util.LogPipelin
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class MessageReMapperProcessorValidation implements LogPipelineProcessorValidation {
@@ -17,7 +19,7 @@ public class MessageReMapperProcessorValidation implements LogPipelineProcessorV
     private final LogPipelineValidationUtil logPipelineValidationUtil;
 
     @Override
-    public LogPipelineProcessorDto validate(final LogPipelineProcessorDto logPipelineProcessorDto) {
+    public List<FieldErrorDto> validate(final LogPipelineProcessorDto logPipelineProcessorDto) {
 
         var allErrors = this.logPipelineValidationUtil
                 .validateLogPipelineBaseProcessor(logPipelineProcessorDto,
@@ -32,9 +34,7 @@ public class MessageReMapperProcessorValidation implements LogPipelineProcessorV
             allErrors.add(error);
         }
 
-
-        logPipelineProcessorDto.setFieldErrorDtoList(allErrors);
-        return logPipelineProcessorDto;
+        return allErrors;
 
     }
 }

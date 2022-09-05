@@ -35,12 +35,14 @@ public class LogPipelineValidationImpl implements LogPipelineValidation {
             var validatedLogPipelineProcessorDto = logPipelineProcessorValidationFactory
                     .create(processorDto)
                     .validate(processorDto);
-            validatedLogPipelineProcessors.add(validatedLogPipelineProcessorDto);
-            allErrors.addAll(validatedLogPipelineProcessorDto.getFieldErrorDtoList());
+//            validatedLogPipelineProcessors.add(validatedLogPipelineProcessorDto);
+            allErrors.addAll(validatedLogPipelineProcessorDto);
+//            validatedLogPipelineProcessors.add(validatedLogPipelineProcessorDto);
+//            allErrors.addAll(validatedLogPipelineProcessorDto.getFieldErrorDtoList());
         }
         if (!allErrors.isEmpty())
             throw new LogPipelineValidationException(I18Constant.LOG_PIPELINE_VALIDATION_ERROR.getCode(), allErrors);
-        logPipelineDto.setProcessors(validatedLogPipelineProcessors);
+//        logPipelineDto.setProcessors(validatedLogPipelineProcessors);
         return logPipelineDto;
     }
 }

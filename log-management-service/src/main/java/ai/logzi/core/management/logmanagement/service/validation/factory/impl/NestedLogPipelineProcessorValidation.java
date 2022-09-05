@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class NestedLogPipelineProcessorValidation implements LogPipelineProcesso
     private final LogPipelineValidationUtil logPipelineValidationUtil;
 
     @Override
-    public LogPipelineProcessorDto validate(final LogPipelineProcessorDto logPipelineProcessorDto) throws Exception {
+    public List<FieldErrorDto> validate(final LogPipelineProcessorDto logPipelineProcessorDto) throws Exception {
 
         var nestLogPipelineProcessorDto = this.logPipelineProcessorDtoMapper
                 .toNestedLogPipeline(logPipelineProcessorDto);
@@ -41,7 +42,6 @@ public class NestedLogPipelineProcessorValidation implements LogPipelineProcesso
                     fieldError.getError()
             ));
         }
-        var validatedLogPipelineProcessorList = new ArrayList<LogPipelineProcessorDto>();
         if (nestLogPipelineProcessorDto.getPipeline() != null) {
             var processors = logPipelineProcessorDto
                     .getNestedPipelineProcessor()
@@ -53,12 +53,12 @@ public class NestedLogPipelineProcessorValidation implements LogPipelineProcesso
                     throw new LogPipelineException(I18Constant.LOG_PROCESSOR_PIPELINE_NESTED_PIPELINE_NOT_VALID.getCode());
 //                "you can not have nested pipeline in another nested pipeline"
                 // Check Nested Pipeline Processors Validations
-                var validatedLogPipelineProcessor = logPipelineProcessorValidationFactory
+                var fieldErrors = logPipelineProcessorValidationFactory
                         .create(processorDto)
                         .validate(processorDto);
-                validatedLogPipelineProcessorList.add(validatedLogPipelineProcessor);
+//                validatedLogPipelineProcessorList.add(fieldErrors);
                 // Generate Correct field key
-                for (var fieldError : validatedLogPipelineProcessor.getFieldErrorDtoList()) {
+                for (var fieldError : fieldErrors) {
                     allErrors.add(new FieldErrorDto(
                             "processors[" + logPipelineProcessorDto.getIndex() + "]." + "pipeline." + fieldError.getField(),
                             fieldError.getError()
@@ -66,11 +66,7 @@ public class NestedLogPipelineProcessorValidation implements LogPipelineProcesso
                 }
             }
         }
-        nestLogPipelineProcessorDto.getPipeline().setProcessors(validatedLogPipelineProcessorList);
 
-        var out = this.logPipelineProcessorDtoMapper
-                .fromNestedLogPipeline(nestLogPipelineProcessorDto);
-        out.setFieldErrorDtoList(allErrors);
-        return out;
+        return allErrors;
     }
 }

@@ -8,13 +8,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class UnknownProcessorValidation implements LogPipelineProcessorValidation {
 
     @Override
-    public LogPipelineProcessorDto validate(final LogPipelineProcessorDto logPipelineProcessorDto) {
+    public List<FieldErrorDto> validate(final LogPipelineProcessorDto logPipelineProcessorDto) {
 
         var allErrors = new ArrayList<FieldErrorDto>();
         // Check Processor type is valid
@@ -28,8 +29,7 @@ public class UnknownProcessorValidation implements LogPipelineProcessorValidatio
                     I18Constant.LOG_PROCESSOR_TYPE_IS_UNKNOWN.getCode());
             allErrors.add(unknownError);
         }
-        var out = new LogPipelineProcessorDto();
-        out.setFieldErrorDtoList(allErrors);
-        return out;
+
+        return allErrors;
     }
 }

@@ -9,6 +9,8 @@ import ai.logzi.core.management.logmanagement.service.validation.util.LogPipelin
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 public class ArithmeticProcessorValidation implements LogPipelineProcessorValidation {
@@ -16,7 +18,7 @@ public class ArithmeticProcessorValidation implements LogPipelineProcessorValida
     private final LogPipelineValidationUtil logPipelineValidationUtil;
 
     @Override
-    public LogPipelineProcessorDto validate(final LogPipelineProcessorDto logPipelineProcessorDto) {
+    public List<FieldErrorDto> validate(final LogPipelineProcessorDto logPipelineProcessorDto) {
 
         var allErrors = this.logPipelineValidationUtil
                 .validateLogPipelineBaseProcessor(logPipelineProcessorDto,
@@ -35,9 +37,7 @@ public class ArithmeticProcessorValidation implements LogPipelineProcessorValida
                     I18Constant.LOG_PROCESSOR_TARGET_IS_EMPTY.getCode());
             allErrors.add(error);
         }
-
-        logPipelineProcessorDto.setFieldErrorDtoList(allErrors);
-        return logPipelineProcessorDto;
+        return allErrors;
 
     }
 }

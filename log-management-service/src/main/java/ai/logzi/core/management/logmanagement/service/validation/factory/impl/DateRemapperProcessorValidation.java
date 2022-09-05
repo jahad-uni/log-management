@@ -10,6 +10,8 @@ import ai.logzi.core.management.logmanagement.service.validation.dto.FieldErrorD
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class DateRemapperProcessorValidation implements LogPipelineProcessorValidation {
@@ -18,7 +20,7 @@ public class DateRemapperProcessorValidation implements LogPipelineProcessorVali
     private final LogPipelineValidationUtil logPipelineValidationUtil;
 
     @Override
-    public LogPipelineProcessorDto validate(final LogPipelineProcessorDto logPipelineProcessorDto) {
+    public List<FieldErrorDto> validate(final LogPipelineProcessorDto logPipelineProcessorDto) {
 
         var allErrors = this.logPipelineValidationUtil
                 .validateLogPipelineBaseProcessor(logPipelineProcessorDto,
@@ -31,8 +33,6 @@ public class DateRemapperProcessorValidation implements LogPipelineProcessorVali
             allErrors.add(error);
         }
 
-        var out = logPipelineProcessorDto;
-        out.setFieldErrorDtoList(allErrors);
-       return out;
+        return allErrors;
     }
 }
