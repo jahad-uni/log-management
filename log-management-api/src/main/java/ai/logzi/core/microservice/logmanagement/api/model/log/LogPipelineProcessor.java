@@ -1,23 +1,19 @@
 package ai.logzi.core.microservice.logmanagement.api.model.log;
 
 import ai.logzi.core.microservice.logmanagement.api.model.log.processors.*;
-import ai.logzi.core.microservice.logmanagement.api.validation.OnlyOneProcessor;
+import ai.logzi.core.microservice.logmanagement.api.validation.OnlyOneProcessorValidator;
 import ai.logzi.core.microservice.logmanagement.common.validation.OnCreate;
-import ai.logzi.core.microservice.logmanagement.common.validation.OnUpdate;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.validation.annotation.Validated;
-
-import javax.validation.Valid;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@OnlyOneProcessor(groups = OnCreate.class)
+@OnlyOneProcessorValidator(groups = OnCreate.class)
 public class LogPipelineProcessor {
 
     private String name;

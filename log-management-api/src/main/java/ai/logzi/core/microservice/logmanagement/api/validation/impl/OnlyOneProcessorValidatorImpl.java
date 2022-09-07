@@ -1,15 +1,14 @@
 package ai.logzi.core.microservice.logmanagement.api.validation.impl;
 
 import ai.logzi.core.microservice.logmanagement.api.model.log.LogPipelineProcessor;
-import ai.logzi.core.microservice.logmanagement.api.validation.OnlyOneProcessor;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class OnlyOneProcessorValidator implements ConstraintValidator<OnlyOneProcessor, LogPipelineProcessor> {
+public class OnlyOneProcessorValidatorImpl implements ConstraintValidator<ai.logzi.core.microservice.logmanagement.api.validation.OnlyOneProcessorValidator, LogPipelineProcessor> {
 
     @Override
-    public void initialize(OnlyOneProcessor constraintAnnotation) {
+    public void initialize(ai.logzi.core.microservice.logmanagement.api.validation.OnlyOneProcessorValidator constraintAnnotation) {
 //        ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
