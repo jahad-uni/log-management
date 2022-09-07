@@ -5,12 +5,13 @@ import ai.logzi.core.microservice.logmanagement.common.validation.OnUpdate;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 //import io.swagger.annotations.ApiModelProperty;
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class LogPipeline {
 
     @Null(groups = OnCreate.class)
     @NotNull(groups = OnUpdate.class)
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(minLength = 3,accessMode = Schema.AccessMode.READ_ONLY)
     private String id;
 
     @NotNull
@@ -62,5 +63,6 @@ public class LogPipeline {
     @JsonProperty("updated_at")
     private String updatedAt;
 
+    @Valid
     private List<LogPipelineProcessor> processors = new ArrayList<>();
 }

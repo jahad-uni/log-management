@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -13,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class GrokParserProcessor {
 
+    @NotNull(message = "source is empty dudeeeee")
     private String source;
     private Grok grok;
     private List<String> samples;
