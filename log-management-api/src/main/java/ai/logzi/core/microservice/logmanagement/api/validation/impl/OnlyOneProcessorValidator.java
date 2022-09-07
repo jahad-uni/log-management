@@ -6,7 +6,7 @@ import ai.logzi.core.microservice.logmanagement.api.validation.OnlyOneProcessor;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class OnlyeOneProcessorValidator implements ConstraintValidator<OnlyOneProcessor, LogPipelineProcessor> {
+public class OnlyOneProcessorValidator implements ConstraintValidator<OnlyOneProcessor, LogPipelineProcessor> {
 
     @Override
     public void initialize(OnlyOneProcessor constraintAnnotation) {
@@ -17,7 +17,7 @@ public class OnlyeOneProcessorValidator implements ConstraintValidator<OnlyOnePr
     public boolean isValid(LogPipelineProcessor value, ConstraintValidatorContext context) {
 
         if (value == null) {
-            throw new IllegalArgumentException("@AddressAnnotation only applies to Address objects");
+            throw new IllegalArgumentException("LogPipelineProcessor must not be null");
         }
         int processorCount = 0;
         if (value.getArithmeticProcessor() != null) processorCount++;
@@ -36,7 +36,7 @@ public class OnlyeOneProcessorValidator implements ConstraintValidator<OnlyOnePr
         if (value.getUrlParser() != null) processorCount++;
         if (value.getUserAgentParser() != null) processorCount++;
 
-        if(processorCount == 0 || processorCount > 1)
+        if (processorCount == 0 || processorCount > 1)
             return false;
         else
             return true;
