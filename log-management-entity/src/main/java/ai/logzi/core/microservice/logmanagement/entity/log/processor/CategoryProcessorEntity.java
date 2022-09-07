@@ -1,7 +1,7 @@
 package ai.logzi.core.microservice.logmanagement.entity.log.processor;
 
 
-import ai.logzi.core.microservice.logmanagement.entity.log.CategoryEntity;
+import ai.logzi.core.microservice.logmanagement.entity.log.processor.model.CategoryEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

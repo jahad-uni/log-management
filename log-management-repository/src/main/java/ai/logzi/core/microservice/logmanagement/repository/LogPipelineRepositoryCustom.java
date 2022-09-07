@@ -1,7 +1,7 @@
 package ai.logzi.core.microservice.logmanagement.repository;
 
 import ai.logzi.core.microservice.logmanagement.entity.log.LogPipelineEntity;
-import ai.logzi.core.microservice.logmanagement.repository.filter.LogPipelineFilter;
+import ai.logzi.core.microservice.logmanagement.repository.model.LogPipelineFilter;
 
 import java.util.List;
 

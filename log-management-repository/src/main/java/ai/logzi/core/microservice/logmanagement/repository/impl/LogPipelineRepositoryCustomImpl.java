@@ -2,7 +2,7 @@ package ai.logzi.core.microservice.logmanagement.repository.impl;
 
 import ai.logzi.core.microservice.logmanagement.entity.log.LogPipelineEntity;
 import ai.logzi.core.microservice.logmanagement.repository.LogPipelineRepositoryCustom;
-import ai.logzi.core.microservice.logmanagement.repository.filter.LogPipelineFilter;
+import ai.logzi.core.microservice.logmanagement.repository.model.LogPipelineFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;

@@ -25,7 +25,8 @@
         <lombok-version>1.18.22</lombok-version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <apache.common.lang3>3.12.0</apache.common.lang3>
-        <spring.openapi.version>1.6.4</spring.openapi.version>
+        <spring.openapi.version>1.6.11</spring.openapi.version>
+        <spring.fox.version>3.0.0</spring.fox.version>
     </properties>
 
     <modules>
@@ -64,6 +65,22 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger2</artifactId>-->
+<!--            <version>${spring.fox.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger-ui</artifactId>-->
+<!--            <version>${spring.fox.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-spring-webmvc</artifactId>-->
+<!--            <version>${spring.fox.version}</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springdoc</groupId>

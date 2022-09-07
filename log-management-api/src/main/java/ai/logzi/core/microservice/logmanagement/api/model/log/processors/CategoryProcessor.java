@@ -1,6 +1,6 @@
 package ai.logzi.core.microservice.logmanagement.api.model.log.processors;
 
-import ai.logzi.core.microservice.logmanagement.api.model.log.Category;
+import ai.logzi.core.microservice.logmanagement.api.model.log.processors.model.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

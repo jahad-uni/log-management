@@ -1,6 +1,6 @@
 package ai.logzi.core.microservice.logmanagement.api.model.log.processors;
 
-import ai.logzi.core.microservice.logmanagement.api.model.log.Grok;
+import ai.logzi.core.microservice.logmanagement.api.model.log.processors.model.Grok;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,3 +19,4 @@ public class GrokParserProcessor {
     @JsonProperty("helper_rules")
     private List<String> helperRules;
 }
+

@@ -1,6 +1,6 @@
 package ai.logzi.core.management.logmanagement.service.dto.log.processor;
 
-import ai.logzi.core.management.logmanagement.service.dto.log.CategoryDto;
+import ai.logzi.core.management.logmanagement.service.dto.log.processor.model.CategoryDto;
 import lombok.Data;
 
 import java.util.List;

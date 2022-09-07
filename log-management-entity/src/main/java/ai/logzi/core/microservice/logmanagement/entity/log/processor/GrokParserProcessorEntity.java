@@ -1,6 +1,6 @@
 package ai.logzi.core.microservice.logmanagement.entity.log.processor;
 
-import ai.logzi.core.microservice.logmanagement.entity.log.GrokEntity;
+import ai.logzi.core.microservice.logmanagement.entity.log.processor.model.GrokEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

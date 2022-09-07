@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LogPipelineProcessor {
 
-    private String id;
-    // Static Fields
     private String name;
     private String type;
     @JsonProperty("is_enabled")
