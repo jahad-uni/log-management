@@ -22,21 +22,23 @@ import java.util.List;
 public class LogPipeline {
 
     @Null(groups = OnCreate.class)
-    @Null(groups = OnUpdate.class)
+    @NotNull(groups = OnUpdate.class)
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private String id;
 
     @NotNull
+    @Size(min=5,max=15)
     private String name;
+
+    @NotEmpty
     private List<String> tags;
+
     private String description;
     private List<String> filters;
 
     @NotNull
     private String type;
 
-//    @Null(groups = OnCreate.class)
-//    @Null(groups = OnUpdate.class)
     @Min(groups= OnCreate.class,value = 0)
     @Max(groups= OnCreate.class,value = 0)
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
@@ -45,9 +47,6 @@ public class LogPipeline {
     @JsonProperty("is_enabled")
     private boolean is_enabled;
 
-//    @Null(groups = OnCreate.class)
-//    @Null(groups = OnUpdate.class)
-//    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     @JsonProperty("is_readonly")
     private boolean is_readonly;
 
