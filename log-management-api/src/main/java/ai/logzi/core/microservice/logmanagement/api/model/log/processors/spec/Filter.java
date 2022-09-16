@@ -1,4 +1,4 @@
-package ai.logzi.core.microservice.logmanagement.api.model.log.processors.model;
+package ai.logzi.core.microservice.logmanagement.api.model.log.processors.spec;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

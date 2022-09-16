@@ -1,6 +1,6 @@
 package ai.logzi.core.microservice.logmanagement.api.model.log.processors;
 
-import ai.logzi.core.microservice.logmanagement.api.model.log.processors.model.Grok;
+import ai.logzi.core.microservice.logmanagement.api.model.log.processors.spec.Grok;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;

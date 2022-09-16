@@ -1,4 +1,4 @@
-package ai.logzi.core.microservice.logmanagement.api.model.log.processors.model;
+package ai.logzi.core.microservice.logmanagement.api.model.log.processors.spec;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

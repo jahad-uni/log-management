@@ -9,14 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
-
 import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-//@OnlyOneProcessorValidator(groups = OnCreate.class)
 public class LogPipelineProcessor extends RepresentationModel<LogPipelineProcessor> {
 
     private String id;
@@ -76,7 +74,5 @@ public class LogPipelineProcessor extends RepresentationModel<LogPipelineProcess
 
     // Nested LogPipeline
     private LogPipeline nestedPipelineProcessor;
-
-
 
 }
