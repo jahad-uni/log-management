@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
-
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.ArrayList;
@@ -47,7 +46,6 @@ public class LogPipeline extends RepresentationModel<LogPipeline> {
 
     @JsonProperty("is_enabled")
     private boolean is_enabled;
-
 
     @JsonProperty("is_readonly")
     private boolean is_readonly;
