@@ -1,6 +1,18 @@
 version: "3"
 
 services:
+
+  mongo-standalone:
+    hostname: localhost
+    container_name: mongo-standalone
+    image: mongo:latest
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    volumes:
+      - './data/mongo-standalone:/data/db:z'
+    restart: always
   mongo1:
     hostname: mongo1
     container_name: mongo1
@@ -39,6 +51,7 @@ services:
     command: "--bind_ip_all --replSet rs0 --port 30003"
 
 volumes:
+  mongo-standalone:
   rs0_mongo1:
   rs0_mongo2:
   rs0_mongo3:
