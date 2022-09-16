@@ -17,7 +17,6 @@ import java.util.List;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @LogPipelineValidator(groups = {OnCreate.class, OnUpdate.class})
-//@OnlyOneProcessorValidator(groups = OnCreate.class)
 public class LogPipeline extends RepresentationModel<LogPipeline> {
 
     @Null(groups = OnCreate.class)
@@ -62,8 +61,6 @@ public class LogPipeline extends RepresentationModel<LogPipeline> {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     @JsonProperty("updated_at")
     private String updatedAt;
-
-
 
     @Valid
     private List<LogPipelineProcessor> processors = new ArrayList<>();
