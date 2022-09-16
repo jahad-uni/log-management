@@ -14,14 +14,17 @@ import java.util.List;
 @Mapper
 public interface LogPipelineMapper {
 
-    LogPipelineDto toLogPipeLineDto   (String tenantId,
-                                       String userId,
-                                       LogPipeline logPipeline);
+    LogPipelineDto toLogPipeLineDto(String tenantId,
+                                    String userId,
+                                    LogPipeline logPipeline);
 
     LogPipelineDto toLogPipeLineDto(String tenantId,
                                     String userId,
                                     String id,
                                     LogPipeline logPipeline);
+
+
+    LogPipelineDto toLogPipeLineDto(LogPipeline logPipeline);
 
 //    GrokParserProcessorDto toGrokParserProcessorDto(GrokParserProcessor grokParserProcessor);
 

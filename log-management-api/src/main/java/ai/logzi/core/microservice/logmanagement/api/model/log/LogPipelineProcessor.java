@@ -1,21 +1,26 @@
 package ai.logzi.core.microservice.logmanagement.api.model.log;
 
 import ai.logzi.core.microservice.logmanagement.api.model.log.processors.*;
-import ai.logzi.core.microservice.logmanagement.api.validation.OnlyOneProcessorValidator;
 import ai.logzi.core.microservice.logmanagement.common.validation.OnCreate;
+import ai.logzi.core.microservice.logmanagement.common.validation.OnUpdate;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@OnlyOneProcessorValidator(groups = OnCreate.class)
-public class LogPipelineProcessor {
+//@OnlyOneProcessorValidator(groups = OnCreate.class)
+public class LogPipelineProcessor extends RepresentationModel<LogPipelineProcessor> {
 
+    private String id;
+    @NotNull(groups = {OnCreate.class, OnUpdate.class})
     private String name;
     private String type;
     @JsonProperty("is_enabled")

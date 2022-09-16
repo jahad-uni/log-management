@@ -1,13 +1,13 @@
 package ai.logzi.core.microservice.logmanagement.api.model.log;
 
+import ai.logzi.core.microservice.logmanagement.api.annotation.LogPipelineValidator;
 import ai.logzi.core.microservice.logmanagement.common.validation.OnCreate;
 import ai.logzi.core.microservice.logmanagement.common.validation.OnUpdate;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LogPipeline {
+@LogPipelineValidator(groups = {OnCreate.class, OnUpdate.class})
+//@OnlyOneProcessorValidator(groups = OnCreate.class)
+public class LogPipeline extends RepresentationModel<LogPipeline> {
 
     @Null(groups = OnCreate.class)
     @NotNull(groups = OnUpdate.class)
@@ -31,6 +31,9 @@ public class LogPipeline {
 
     @NotEmpty(groups = {OnCreate.class, OnUpdate.class})
     private List<String> tags;
+
+    @Email(groups = {OnCreate.class, OnUpdate.class})
+    private String email;
 
     private String description;
     private List<String> filters;
@@ -46,6 +49,7 @@ public class LogPipeline {
     @JsonProperty("is_enabled")
     private boolean is_enabled;
 
+
     @JsonProperty("is_readonly")
     private boolean is_readonly;
 
@@ -58,6 +62,8 @@ public class LogPipeline {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     @JsonProperty("updated_at")
     private String updatedAt;
+
+
 
     @Valid
     private List<LogPipelineProcessor> processors = new ArrayList<>();

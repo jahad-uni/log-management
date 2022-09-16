@@ -74,7 +74,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers,
                                                                   HttpStatus status,
                                                                   WebRequest request) {
-        ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now().toString(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Validation error. Check 'errors' field for details.");
+        ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now().toString(),
+                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                "Validation error. Check 'errors' field for details.");
         for (FieldError fieldError : exception.getBindingResult().getFieldErrors()) {
             errorResponse.addValidationError(fieldError.getField(), fieldError.getDefaultMessage());
         }
@@ -86,11 +88,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponse> handleLogPipelineNotFoundException(LogPipelineNotFoundException exception
             , WebRequest request) {
-        log.error("Failed to find the log pipeline with id "+exception.getId(), exception);
+        log.error("Failed to find the log pipeline with id " + exception.getId(), exception);
         ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now().toString(),
                 HttpStatus.BAD_REQUEST.value(),
-                localeHelper.getLocalMessage(exception.getMessage(),exception.getId()));
+                localeHelper.getLocalMessage(exception.getMessage(), exception.getId()));
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 

@@ -22,7 +22,7 @@ public class LogPipelineValidationImpl implements LogPipelineValidation {
     private final LogPipelineValidationUtil logPipelineValidationUtil;
 
     @Override
-    public LogPipelineDto validateLogPipeline(final LogPipelineDto logPipelineDto) throws Exception {
+    public LogPipelineDto validateLogPipeline(final LogPipelineDto logPipelineDto) throws LogPipelineValidationException,Exception {
 
 
         var allErrors = this.logPipelineValidationUtil
