@@ -183,22 +183,22 @@ public class LogPipelineController {
     private void addLogPipelineLinks(String tenantId, String userId, LogPipeline logPipeline) {
 
         Link selfLink = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder
-                        .methodOn(LogPipelineController.class)
-                        .getLogPipeline(tenantId, userId, logPipeline.getId())).withSelfRel();
+                .methodOn(LogPipelineController.class)
+                .getLogPipeline(tenantId, userId, logPipeline.getId())).withSelfRel();
         logPipeline.add(selfLink);
 
-        if (logPipeline.getProcessors().size() > 0) {
+        if (logPipeline.getProcessors()!=null && logPipeline.getProcessors().size() > 0) {
             Link processorsLink = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder
-                            .methodOn(LogPipelineController.class)
-                            .getLogPipelineProcessors(tenantId, userId, logPipeline.getId())).withRel("processors");
+                    .methodOn(LogPipelineController.class)
+                    .getLogPipelineProcessors(tenantId, userId, logPipeline.getId())).withRel("processors");
             logPipeline.add(processorsLink);
         }
     }
 
-    private void addLogPipelinesLinks(String tenantId, String userId, List<LogPipeline> logPipelines){
-        for(LogPipeline logPipeline : logPipelines){
-            addLogPipelineLinks(tenantId, userId, logPipeline);
-        }
+    private void addLogPipelinesLinks(String tenantId, String userId, List<LogPipeline> logPipelines) {
+
+        logPipelines.forEach(logPipeline ->
+                this.addLogPipelineLinks(tenantId, userId, logPipeline));
     }
 
     //endregion
