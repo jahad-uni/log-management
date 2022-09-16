@@ -217,8 +217,8 @@ public class LogPipelineServiceImpl implements LogPipelineService {
     public LogPipelineDto createLogPipeline(final String tenantId,
                                             final LogPipelineDto logPipelineDto) throws Exception {
 
-//        var validatedLogPipelineDto = logPipelineValidation
-//                .validateLogPipeline(logPipelineDto);
+        var validatedLogPipelineDto = logPipelineValidation
+                .validateLogPipeline(logPipelineDto);
 
         var logPipelineEntity = logPipelineDtoMapper
                 .toLogPipelineEntity(tenantId, logPipelineDto);

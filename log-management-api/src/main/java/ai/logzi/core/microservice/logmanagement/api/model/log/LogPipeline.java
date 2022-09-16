@@ -15,7 +15,7 @@ import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@LogPipelineValidator(groups = {OnCreate.class, OnUpdate.class})
+//@LogPipelineValidator(groups = {OnCreate.class, OnUpdate.class})
 public class LogPipeline extends RepresentationModel<LogPipeline> {
 
     @Null(groups = OnCreate.class)
