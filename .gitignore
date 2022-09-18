@@ -7,6 +7,7 @@
 /log-management-entity/target
 /log-management-repository/target
 /log-management-service/target
+/log-management-aop/target
 
 /log-management.iml
 /log-management-api/log-management-api.iml
@@ -15,6 +16,7 @@
 /log-management-entity/log-management-entity.iml
 /log-management-repository/log-management-repository.iml
 /log-management-service/log-management-service.iml
+/log-management-aop/log-management-aop.iml
 
 
 

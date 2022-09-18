@@ -1,4 +1,4 @@
-package ai.logzi.core.microservice.logmanagement.app.exception.dto;
+package ai.logzi.core.microservice.logmanagement.aop.Exception.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

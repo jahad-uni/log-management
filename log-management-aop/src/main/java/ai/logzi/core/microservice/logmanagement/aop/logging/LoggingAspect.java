@@ -1,4 +1,4 @@
-package ai.logzi.core.microserice.logmanagement.aspect.logging;
+package ai.logzi.core.microservice.logmanagement.aop.logging;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,60 +18,58 @@ public class LoggingAspect {
     private static final Logger LOGGER = LogManager.getLogger(LoggingAspect.class);
 
     @Before(value = "execution(* ai.logzi.core.microservice.logmanagement.api.controller.LogPipelineController.*(..)))")
-    public void beforeAdvice(JoinPoint joinPoint){
+    public void beforeLogging(JoinPoint joinPoint){
 
+        LOGGER.info("Logging...Before LogPipelineController Rest call");
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 
         //Get intercepted method details
         String className = methodSignature.getDeclaringType().getSimpleName();
         String methodName = methodSignature.getName();
+        String[] methodParameters = methodSignature.getParameterNames();
 
-        //get parameter name
-        System.out.println(Arrays.toString(methodSignature.getParameterNames()));
-
-        // logging
+        //logging class and method name
         LOGGER.info("call " + methodName + " method in " + className);
+
+        //logging method parameters
+        LOGGER.info("Method Parameters: " + Arrays.toString(methodParameters));
 
         // get argument value
         Object[] objects = joinPoint.getArgs();
-        System.out.println(Arrays.toString(objects));
-        System.out.println(joinPoint.toString());
+        LOGGER.info(Arrays.toString(objects));
+        LOGGER.info(joinPoint.toString());
 
     }
 
     // The first way :
     @After(value = "execution(* ai.logzi.core.microservice.logmanagement.api.controller.LogPipelineController.*(..)))")
-    public void afterAdvice(JoinPoint joinPoint){
+    public void afterLogging(JoinPoint joinPoint){
 
         // logging
-        LOGGER.info("finish method 1");
+        LOGGER.info("Logging...After LogPipelineController Rest call");
 
     }
 
     // The second way :
     @Pointcut("execution(* ai.logzi.core.microservice.logmanagement.api.*.LogPipelineController.*(..)))")
-    public void employeeControllerLog2(){}
+    public void logPipelineControllerLog(){}
 
-    @After("employeeControllerLog2()")
-    public void afterAdvice2(JoinPoint joinPoint){
+    @Before("logPipelineControllerLog()")
+    public void beforAdvice2(JoinPoint joinPoint){
 
         // logging
-        LOGGER.info("finish method 2");
+        LOGGER.info("Logging...Before Pointcut");
 
     }
 
-    //the third way :
-//    @After("ai.logzi.core.microserice.logmanagement.api.logging.logPipelineControllerLog()")
-//    public void afterAdvice3(JoinPoint joinPoint){
-//
-//        // logging
-//        LOGGER.info("finish method 3");
-//
-//    }
+    @After("logPipelineControllerLog()")
+    public void afterAdvice2(JoinPoint joinPoint){
 
-    //**********************************************************************************
+        // logging
+        LOGGER.info("Logging...After Pointcut");
 
-    //    @Around : Advice that surrounds a join point such as a method invocation.
+    }
+
     @Around(value = "execution(* ai.logzi.core.microservice.logmanagement.api.controller.LogPipelineController.*(..)))")
     public Object AroundAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
@@ -85,7 +83,5 @@ public class LoggingAspect {
                 + ":: " + stopWatch.getTotalTimeMillis() + " ms");
 
         return result;
-//        return ResponseEntity.ok("result");
-
     }
 }

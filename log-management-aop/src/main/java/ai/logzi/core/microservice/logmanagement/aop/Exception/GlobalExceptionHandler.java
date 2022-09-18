@@ -1,12 +1,11 @@
-package ai.logzi.core.microservice.logmanagement.app.exception;
-
+package ai.logzi.core.microservice.logmanagement.aop.Exception;
 
 import ai.logzi.core.management.logmanagement.service.exception.LogPipelineException;
 import ai.logzi.core.management.logmanagement.service.exception.LogPipelineIdListValidationException;
 import ai.logzi.core.management.logmanagement.service.exception.LogPipelineNotFoundException;
 import ai.logzi.core.management.logmanagement.service.exception.LogPipelineValidationException;
 import ai.logzi.core.microservice.logmanagement.common.helper.LocaleHelper;
-import ai.logzi.core.microservice.logmanagement.app.exception.dto.ErrorResponse;
+import ai.logzi.core.microservice.logmanagement.aop.Exception.dto.ErrorResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -33,6 +32,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 //    @Value("${reflectoring.trace:false}")
 //    private boolean printStackTrace;
+
+    @ExceptionHandler(UserNotAuthorizedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<Object> handleUserNotAuthorizedException(UserNotAuthorizedException exception, WebRequest request) {
+        log.error("Authorization exception", exception);
+        return buildErrorResponse(exception,
+                localeHelper.getLocalMessage(exception.getMessage()),
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                request);
+    }
+
 
     @ExceptionHandler(LogPipelineException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

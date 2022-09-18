@@ -12,7 +12,6 @@ import ai.logzi.core.management.logmanagement.service.validation.dto.FieldErrorD
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
