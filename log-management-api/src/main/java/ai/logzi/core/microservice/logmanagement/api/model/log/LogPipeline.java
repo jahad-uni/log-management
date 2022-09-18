@@ -5,6 +5,7 @@ import ai.logzi.core.microservice.logmanagement.common.validation.OnCreate;
 import ai.logzi.core.microservice.logmanagement.common.validation.OnUpdate;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;

@@ -36,6 +36,7 @@
         <module>log-management-repository</module>
         <module>log-management-entity</module>
         <module>log-management-common</module>
+        <module>log-management-aspect</module>
     </modules>
 
     <dependencies>
@@ -45,24 +46,6 @@
 <!--            <artifactId>spring-boot-starter-test</artifactId>-->
 <!--            <scope>test</scope>-->
 <!--        </dependency>-->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.hateoas</groupId>-->
-<!--            <artifactId>spring-hateoas</artifactId>-->
-<!--            <version>1.4.1</version>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-hateoas</artifactId>
-        </dependency>
-
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -114,6 +97,21 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${apache.common.lang3}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
 

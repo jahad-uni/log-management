@@ -9,8 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+
     <groupId>ai.logzi.core.microservice.logmanagement</groupId>
-    <artifactId>log-management-entity</artifactId>
+    <artifactId>log-management-aspect</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
