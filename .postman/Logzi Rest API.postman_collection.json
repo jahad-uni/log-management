@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "396f8b0b-ef7e-4d99-ada6-6f4fcd1aba6f",
+		"_postman_id": "6d118e73-df07-4e30-9983-c718f606c245",
 		"name": "Logzi Rest API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6444445"
@@ -582,7 +582,7 @@
 							"query": [
 								{
 									"key": "filter",
-									"value": null
+									"value": ""
 								}
 							]
 						},
@@ -686,7 +686,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/6324da9ca2d66c27709e18bb",
+							"raw": "{{base-url}}/api/v1/tenant/{{tenantId}}/logs/config/pipelines/6324dafda2d66c27709e18bc",
 							"host": [
 								"{{base-url}}"
 							],
@@ -698,7 +698,7 @@
 								"logs",
 								"config",
 								"pipelines",
-								"6324da9ca2d66c27709e18bb"
+								"6324dafda2d66c27709e18bc"
 							]
 						}
 					},
@@ -916,6 +916,209 @@
 								"logs",
 								"config",
 								"pipelines"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Actuator",
+			"item": [
+				{
+					"name": "All Actuator Links",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/mgmt/loggers",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"mgmt",
+								"loggers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ConfigProps",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/mgmt/configprops",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"mgmt",
+								"configprops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AutoConfig",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/mgmt/conditions",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"mgmt",
+								"conditions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Environment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/mgmt/env",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"mgmt",
+								"env"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/mgmt/health",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"mgmt",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/mgmt/metrics",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"mgmt",
+								"metrics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mappings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/mgmt/mappings",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"mgmt",
+								"mappings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Beans",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/mgmt/beans",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"mgmt",
+								"beans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Caches",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/mgmt/caches",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"mgmt",
+								"caches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loggers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/mgmt/loggers",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"mgmt",
+								"loggers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ThreadDump",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/mgmt/threaddump",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"mgmt",
+								"threaddump"
 							]
 						}
 					},
