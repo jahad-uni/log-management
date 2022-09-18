@@ -23,6 +23,11 @@
 								"key": "Accept-Language",
 								"value": "{{lang}}",
 								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 111111",
+								"type": "text"
 							}
 						],
 						"body": {
