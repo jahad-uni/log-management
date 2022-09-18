@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Slf4j(topic = "GLOBAL_EXCEPTION_HANDLER")
 @ControllerAdvice
@@ -29,9 +27,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     public static final String TRACE = "trace";
     private LocaleHelper localeHelper;
-
-//    @Value("${reflectoring.trace:false}")
-//    private boolean printStackTrace;
 
     @ExceptionHandler(UserNotAuthorizedException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -126,17 +121,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now().toString(),
                 httpStatus.value(),
                 message);
-//        if (printStackTrace && isTraceOn(request)) {
-//            errorResponse.setStackTrace(ExceptionUtils.getStackTrace(exception));
-//        }
         return ResponseEntity.status(httpStatus).body(errorResponse);
-    }
-
-    private boolean isTraceOn(WebRequest request) {
-        String[] value = request.getParameterValues(TRACE);
-        return Objects.nonNull(value)
-                && value.length > 0
-                && value[0].contentEquals("true");
     }
 
     @Override

@@ -73,7 +73,6 @@ public class CheckRoleAspect {
         return result;
     }
 
-
     private String[] getRoles(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
