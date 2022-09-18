@@ -74,7 +74,7 @@ public class CheckRoleAspect {
     }
 
 
-    public String[] getRoles(JoinPoint joinPoint) {
+    private String[] getRoles(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         CheckRole checkRole = method.getAnnotation(CheckRole.class);

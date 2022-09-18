@@ -52,18 +52,18 @@ public class LoggingAspect {
 
     // The second way :
     @Pointcut("execution(* ai.logzi.core.microservice.logmanagement.api.*.LogPipelineController.*(..)))")
-    public void logPipelineControllerLog(){}
+    public void logPipelineControllerPointcut(){}
 
-    @Before("logPipelineControllerLog()")
-    public void beforAdvice2(JoinPoint joinPoint){
+    @Before("logPipelineControllerPointcut()")
+    public void beforePointcut(JoinPoint joinPoint){
 
         // logging
         LOGGER.info("Logging...Before Pointcut");
 
     }
 
-    @After("logPipelineControllerLog()")
-    public void afterAdvice2(JoinPoint joinPoint){
+    @After("logPipelineControllerPointcut()")
+    public void afterPointCut(JoinPoint joinPoint){
 
         // logging
         LOGGER.info("Logging...After Pointcut");
