@@ -8,16 +8,20 @@ import ai.logzi.core.microservice.logmanagement.api.model.log.LogPipeline;
 import ai.logzi.core.microservice.logmanagement.api.model.log.LogPipelineProcessor;
 import ai.logzi.core.microservice.logmanagement.api.model.log.processors.GrokParserProcessor;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
 @Mapper
 public interface LogPipelineMapper {
 
+    @Mapping(target="emailBox", source = "logPipeline.email")
+//    @Mapping(target="startDt", source="dto.employeeStartDt",
+//            dateFormat="dd-MM-yyyy HH:mm:ss")
     LogPipelineDto toLogPipeLineDto(String tenantId,
                                     String userId,
                                     LogPipeline logPipeline);
-
+    @Mapping(target="updatedTime", source = "logPipeline.updatedAt")
     LogPipelineDto toLogPipeLineDto(String tenantId,
                                     String userId,
                                     String id,

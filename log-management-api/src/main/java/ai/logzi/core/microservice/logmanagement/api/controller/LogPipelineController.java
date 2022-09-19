@@ -3,6 +3,7 @@ package ai.logzi.core.microservice.logmanagement.api.controller;
 import ai.logzi.core.management.logmanagement.service.LogPipelineService;
 import ai.logzi.core.management.logmanagement.service.dto.log.LogPipelineDto;
 import ai.logzi.core.microservice.logmanagement.api.annotation.CheckRole;
+import ai.logzi.core.microservice.logmanagement.api.mapper.LogPipelineCustomMapper;
 import ai.logzi.core.microservice.logmanagement.api.mapper.LogPipelineMapper;
 import ai.logzi.core.microservice.logmanagement.api.model.log.LogPipeline;
 import ai.logzi.core.microservice.logmanagement.common.constant.I18Constant;
@@ -33,6 +34,7 @@ public class LogPipelineController {
 
     private final LogPipelineService logPipelineService;
     private final LogPipelineMapper logPipelineMapper;
+    private final LogPipelineCustomMapper logPipelineCustomMapper;
     private final LocaleHelper localeHelper;
 
     //endregion
@@ -111,6 +113,9 @@ public class LogPipelineController {
     createLogPipeline(@PathVariable final String tenantId,
                       @RequestHeader("user_id") final String userId,
                       @RequestBody @Validated(value = OnCreate.class) final LogPipeline logPipeline) throws Exception {
+
+//        var logPipelineDto = this.logPipelineCustomMapper
+//                .toLogPipeLineDto(tenantId, userId, logPipeline);
 
         var logPipelineDto = this.logPipelineMapper
                 .toLogPipeLineDto(tenantId, userId, logPipeline);

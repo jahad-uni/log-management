@@ -30,4 +30,8 @@ public class LogPipelineDto {
     private String updatedBy;
     private LocalDateTime updatedAt;
 
+    private String emailBox;
+
+    private String updatedTime;
+
 }

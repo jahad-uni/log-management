@@ -11,6 +11,7 @@ import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class LogPipeline extends RepresentationModel<LogPipeline> {
 
     @Null(groups = OnCreate.class)
     @NotNull(groups = OnUpdate.class)
-    @Schema(minLength = 3, accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private String id;
 
     @NotNull(groups = {OnCreate.class, OnUpdate.class})
@@ -60,6 +61,8 @@ public class LogPipeline extends RepresentationModel<LogPipeline> {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     @JsonProperty("updated_at")
     private String updatedAt;
+
+    private LocalDateTime updatedTime;
 
     @Valid
     private List<LogPipelineProcessor> processors = new ArrayList<>();

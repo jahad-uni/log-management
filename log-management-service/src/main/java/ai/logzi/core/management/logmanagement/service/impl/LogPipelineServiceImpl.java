@@ -278,6 +278,11 @@ public class LogPipelineServiceImpl implements LogPipelineService {
         this.logPipelineRepository.deleteAllByTenantId(tenantId);
     }
 
+    @Override
+    public String getEmailAddress(String email) {
+        return email;
+    }
+
     public List<String> getUpdatedByIdsDistinct(final String tenantId) {
 
         return this.logPipelineRepository

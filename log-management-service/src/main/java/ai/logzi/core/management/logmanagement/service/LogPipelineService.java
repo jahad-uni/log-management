@@ -31,4 +31,7 @@ public interface LogPipelineService {
 
     void deleteAllLogPipelines(final String tenantId);
 
+
+    String getEmailAddress(final String email);
+
 }
