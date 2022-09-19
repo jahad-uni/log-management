@@ -1,7 +1,6 @@
 package ai.logzi.core.microservice.logmanagement.aop.Exception;
 
-import ai.logzi.core.management.logmanagement.service.exception.LogPipelineException;
-import ai.logzi.core.management.logmanagement.service.exception.LogPipelineIdListValidationException;
+import ai.logzi.core.management.logmanagement.service.exception.NestedLogPipelineProcessorException;
 import ai.logzi.core.management.logmanagement.service.exception.LogPipelineNotFoundException;
 import ai.logzi.core.management.logmanagement.service.exception.LogPipelineValidationException;
 import ai.logzi.core.microservice.logmanagement.common.helper.LocaleHelper;
@@ -18,9 +17,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 import java.time.LocalDateTime;
 
-@Slf4j(topic = "GLOBAL_EXCEPTION_HANDLER")
+@Slf4j()
 @ControllerAdvice
 @AllArgsConstructor
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -31,41 +31,34 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UserNotAuthorizedException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleUserNotAuthorizedException(UserNotAuthorizedException exception, WebRequest request) {
-        log.error("Authorization exception", exception);
-        return buildErrorResponse(exception,
-                localeHelper.getLocalMessage(exception.getMessage()),
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                request);
-    }
-
-
-    @ExceptionHandler(LogPipelineException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<Object> handleLogPipelineException(LogPipelineException exception, WebRequest request) {
-        log.error("Log pipeline exception", exception);
-        return buildErrorResponse(exception,
-                localeHelper.getLocalMessage(exception.getMessage()),
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                request);
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(LogPipelineIdListValidationException.class)
-    protected ResponseEntity<Object> handleLogPipelineIdListValidationException(LogPipelineIdListValidationException exception) {
+        log.error(exception.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now().toString(),
                 HttpStatus.BAD_REQUEST.value(),
-                localeHelper.getLocalMessage(exception.getMessage()));
+                localeHelper.getLocalMessage(exception.getCode()));
         return ResponseEntity.unprocessableEntity().body(errorResponse);
+    }
+
+    @ExceptionHandler(NestedLogPipelineProcessorException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<Object> handleLogPipelineException(NestedLogPipelineProcessorException exception, WebRequest request) {
+        log.error(exception.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now().toString(),
+                HttpStatus.BAD_REQUEST.value(),
+                localeHelper.getLocalMessage(exception.getCode()));
+        return ResponseEntity.unprocessableEntity().body(errorResponse);
+
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(LogPipelineValidationException.class)
-    protected ResponseEntity<Object> handleLogPipelineException(LogPipelineValidationException exception) {
+    protected ResponseEntity<Object> LogPipelineValidationException(LogPipelineValidationException exception) {
+        log.error(exception.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now().toString(),
                 HttpStatus.BAD_REQUEST.value(),
-                localeHelper.getLocalMessage(exception.getMessage()));
+                localeHelper.getLocalMessage(exception.getCode()));
         for (var fieldError : exception.getFieldErrors()) {
             errorResponse.addValidationError(fieldError.getField(),
                     localeHelper.getLocalMessage(fieldError.getError()));
@@ -73,12 +66,36 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 
+    @ExceptionHandler(LogPipelineNotFoundException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handleLogPipelineNotFoundException(LogPipelineNotFoundException exception
+            , WebRequest request) {
+        log.error(exception.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now().toString(),
+                HttpStatus.BAD_REQUEST.value(),
+                localeHelper.getLocalMessage(exception.getCode(), exception.getId()));
+        return ResponseEntity.unprocessableEntity().body(errorResponse);
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<Object> handleAllUncaughtException(Exception exception, WebRequest request) {
+        log.error("Unknown error occurred", exception);
+        ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now().toString(),
+                400,
+                localeHelper.getLocalMessage(exception.getMessage()));
+        return ResponseEntity.unprocessableEntity().body(errorResponse);
+    }
+
+
     @Override
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
                                                                   HttpHeaders headers,
                                                                   HttpStatus status,
                                                                   WebRequest request) {
+        log.error(exception.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now().toString(),
                 HttpStatus.UNPROCESSABLE_ENTITY.value(),
                 "Validation error. Check 'errors' field for details.");
@@ -89,48 +106,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 
-    @ExceptionHandler(LogPipelineNotFoundException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorResponse> handleLogPipelineNotFoundException(LogPipelineNotFoundException exception
-            , WebRequest request) {
-        log.error("Failed to find the log pipeline with id " + exception.getId(), exception);
-        ErrorResponse errorResponse = new ErrorResponse(
-                LocalDateTime.now().toString(),
-                HttpStatus.BAD_REQUEST.value(),
-                localeHelper.getLocalMessage(exception.getMessage(), exception.getId()));
-        return ResponseEntity.unprocessableEntity().body(errorResponse);
-    }
-
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<Object> handleAllUncaughtException(Exception exception, WebRequest request) {
-        log.error("Unknown error occurred", exception);
-        return buildErrorResponse(exception, "unknown error", HttpStatus.INTERNAL_SERVER_ERROR, request);
-    }
-
-    private ResponseEntity<Object> buildErrorResponse(Exception exception,
-                                                      HttpStatus httpStatus,
-                                                      WebRequest request) {
-        return buildErrorResponse(exception, exception.getMessage(), httpStatus, request);
-    }
-
-    private ResponseEntity<Object> buildErrorResponse(Exception exception,
-                                                      String message,
-                                                      HttpStatus httpStatus,
-                                                      WebRequest request) {
-        ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now().toString(),
-                httpStatus.value(),
-                message);
-        return ResponseEntity.status(httpStatus).body(errorResponse);
-    }
-
     @Override
-    public ResponseEntity<Object> handleExceptionInternal(Exception ex,
+    public ResponseEntity<Object> handleExceptionInternal(Exception exception,
                                                           Object body,
                                                           HttpHeaders headers,
                                                           HttpStatus status,
                                                           WebRequest request) {
-
-        return buildErrorResponse(ex, status, request);
+        log.error(exception.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now().toString(),
+                400,
+                localeHelper.getLocalMessage(exception.getMessage()));
+        return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 }

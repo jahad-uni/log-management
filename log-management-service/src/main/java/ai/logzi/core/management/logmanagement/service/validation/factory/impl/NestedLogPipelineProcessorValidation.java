@@ -1,13 +1,12 @@
 package ai.logzi.core.management.logmanagement.service.validation.factory.impl;
 
 
-import ai.logzi.core.management.logmanagement.service.exception.LogPipelineException;
+import ai.logzi.core.management.logmanagement.service.exception.NestedLogPipelineProcessorException;
 import ai.logzi.core.management.logmanagement.service.dto.log.LogPipelineProcessorDto;
 import ai.logzi.core.management.logmanagement.service.mapper.LogPipelineProcessorDtoMapper;
 import ai.logzi.core.management.logmanagement.service.validation.factory.LogPipelineProcessorValidation;
 import ai.logzi.core.management.logmanagement.service.validation.factory.LogPipelineProcessorValidationFactory;
 import ai.logzi.core.management.logmanagement.service.validation.util.LogPipelineValidationUtil;
-import ai.logzi.core.management.logmanagement.service.constant.I18Constant;
 import ai.logzi.core.management.logmanagement.service.validation.dto.FieldErrorDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -49,7 +48,7 @@ public class NestedLogPipelineProcessorValidation implements LogPipelineProcesso
                 processorDto.setIndex( String.valueOf(processors.indexOf(processorDto)));
                 // Check nested pipeline does not have processor of type nested-log-pipeline.
                 if (processorDto.getNestedPipelineProcessor() != null)
-                    throw new LogPipelineException(I18Constant.LOG_PROCESSOR_PIPELINE_NESTED_PIPELINE_NOT_VALID.getCode());
+                    throw new NestedLogPipelineProcessorException();
 //                "you can not have nested pipeline in another nested pipeline"
                 // Check Nested Pipeline Processors Validations
                 var fieldErrors = logPipelineProcessorValidationFactory

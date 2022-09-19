@@ -51,7 +51,7 @@ public class CheckRoleAspect {
             }
         }
         if(!isAuth)
-            throw new UserNotAuthorizedException("user.not.authorized");
+            throw new UserNotAuthorizedException();
     }
 
     @AfterReturning(pointcut = "@annotation(ai.logzi.core.microservice.logmanagement.api.annotation.CheckRole)")

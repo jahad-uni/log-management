@@ -30,9 +30,9 @@ public class ErrorResponse {
     }
 
     public void addValidationError(String field, String message){
-        if(Objects.isNull(errors)){
-            errors = new ArrayList<>();
+        if(Objects.isNull(this.errors)){
+            this.errors = new ArrayList<>();
         }
-        errors.add(new ValidationError(field, message));
+        this.errors.add(new ValidationError(field, message));
     }
 }

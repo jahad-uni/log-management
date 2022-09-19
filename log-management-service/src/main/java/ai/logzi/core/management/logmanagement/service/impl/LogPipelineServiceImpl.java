@@ -1,7 +1,7 @@
 package ai.logzi.core.management.logmanagement.service.impl;
 
 import ai.logzi.core.management.logmanagement.service.LogPipelineService;
-import ai.logzi.core.management.logmanagement.service.constant.I18Constant;
+import ai.logzi.core.microservice.logmanagement.common.constant.I18Constant;
 import ai.logzi.core.management.logmanagement.service.dto.log.LogPipelineDto;
 import ai.logzi.core.management.logmanagement.service.dto.log.processor.model.LogPipelineFilterDto;
 import ai.logzi.core.management.logmanagement.service.exception.LogPipelineNotFoundException;
@@ -38,21 +38,11 @@ public class LogPipelineServiceImpl implements LogPipelineService {
 
         return logPipelineRepository
                 .findOneByTenantIdAndId(tenantId, id)
-                .orElseThrow(() -> new LogPipelineNotFoundException(
-                        I18Constant.LOG_PIPELINE_NOT_FOUND.getCode(),
-                        id));
-    }
-
-    private LogPipelineEntity loadLogPipeline(final String id) {
-
-        return this.logPipelineRepository.findById(id)
-                .orElseThrow(() -> new LogPipelineNotFoundException(
-                        I18Constant.LOG_PIPELINE_NOT_FOUND.getCode(),
-                        id));
+                .orElseThrow(() -> new LogPipelineNotFoundException(id));
     }
 
     @Override
-    public List<LogPipelineDto> getAllLogPipelinesOrderByOrder(final String tenantId) {
+    public List<LogPipelineDto> getAllLogPipelines(final String tenantId) {
 
         var logPipelineEntityListFromDB = this.logPipelineRepository
                 .findAllByTenantIdOrderByOrder(tenantId);
@@ -147,8 +137,8 @@ public class LogPipelineServiceImpl implements LogPipelineService {
     }
 
     @Override
-    public List<LogPipelineDto> getAllLogPipelinesOrderByOrder(final String tenantId,
-                                                               final LogPipelineFilterDto logPipelineFilterDto) {
+    public List<LogPipelineDto> getAllLogPipelines(final String tenantId,
+                                                   final LogPipelineFilterDto logPipelineFilterDto) {
 
         var logPipelineFilter = this.logPipelineFilterDtoMapper
                 .toLogPipelineFilter(logPipelineFilterDto);
@@ -275,7 +265,7 @@ public class LogPipelineServiceImpl implements LogPipelineService {
                                   final String id) {
 
         var logPipelineDtoList = this
-                .getAllLogPipelinesOrderByOrder(tenantId);
+                .getAllLogPipelines(tenantId);
         logPipelineDtoList.removeIf(f -> f.getId().equals(id));
 
         this.logPipelineRepository.deleteByTenantIdAndId(tenantId, id);

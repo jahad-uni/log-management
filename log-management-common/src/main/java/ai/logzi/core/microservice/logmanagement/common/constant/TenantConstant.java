@@ -1,4 +1,4 @@
-package ai.logzi.core.management.logmanagement.service.constant;
+package ai.logzi.core.microservice.logmanagement.common.constant;
 
 import lombok.Getter;
 

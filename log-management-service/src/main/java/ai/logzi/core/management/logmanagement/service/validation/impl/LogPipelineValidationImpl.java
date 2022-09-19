@@ -1,6 +1,6 @@
 package ai.logzi.core.management.logmanagement.service.validation.impl;
 
-import ai.logzi.core.management.logmanagement.service.constant.I18Constant;
+import ai.logzi.core.microservice.logmanagement.common.constant.I18Constant;
 import ai.logzi.core.management.logmanagement.service.dto.log.LogPipelineDto;
 import ai.logzi.core.management.logmanagement.service.dto.log.LogPipelineProcessorDto;
 import ai.logzi.core.management.logmanagement.service.exception.LogPipelineValidationException;
@@ -32,16 +32,16 @@ public class LogPipelineValidationImpl implements LogPipelineValidation {
         // Check LogPipelineProcessors
         for (var processorDto : logPipelineDto.getProcessors()) {
            processorDto.setIndex(String.valueOf(logPipelineDto.getProcessors().indexOf(processorDto)));
-            var validatedLogPipelineProcessorDto = logPipelineProcessorValidationFactory
+            var fieldErrorDtoList = logPipelineProcessorValidationFactory
                     .create(processorDto)
                     .validate(processorDto);
-//            validatedLogPipelineProcessors.add(validatedLogPipelineProcessorDto);
-            allErrors.addAll(validatedLogPipelineProcessorDto);
-//            validatedLogPipelineProcessors.add(validatedLogPipelineProcessorDto);
-//            allErrors.addAll(validatedLogPipelineProcessorDto.getFieldErrorDtoList());
+//            validatedLogPipelineProcessors.add(fieldErrorDtoList);
+            allErrors.addAll(fieldErrorDtoList);
+//            validatedLogPipelineProcessors.add(fieldErrorDtoList);
+//            allErrors.addAll(fieldErrorDtoList.getFieldErrorDtoList());
         }
         if (!allErrors.isEmpty())
-            throw new LogPipelineValidationException(I18Constant.LOG_PIPELINE_VALIDATION_ERROR.getCode(), allErrors);
+            throw new LogPipelineValidationException(allErrors);
 //        logPipelineDto.setProcessors(validatedLogPipelineProcessors);
         return logPipelineDto;
     }

@@ -1,9 +1,11 @@
-package ai.logzi.core.management.logmanagement.service.constant;
+package ai.logzi.core.microservice.logmanagement.common.constant;
 
 import lombok.Getter;
 
 @Getter
 public enum I18Constant {
+
+    USER_NOT_AUTHORIZED("user.not.authorized"),
 
     //region General Messages
     READ_SUCCESSFULLY("read.successfully"),
@@ -22,6 +24,7 @@ public enum I18Constant {
     LOG_PIPELINE_ORDER_ID_LIST_NOT_COMPLETE("log.pipeline.order.id.list.not.complete"),
     UPDATE_ONLY_ONE_OR_TWO_PIPELINE("update.only.one.or.two.pipeline"),
     DELETED_PIPELINE_CAN_NOT_UPDATE("deleted.pipeline.can.not.update"),
+    LOG_PROCESSOR_COUNT_IS_INVALID("log.processor.count.is.invalid"),
     LOG_PROCESSOR_NAME_IS_EMPTY("log.processor.name.absent"),
     LOG_PROCESSOR_SOURCE_IS_EMPTY("log.processor.source.absent"),
     LOG_PROCESSOR_TYPE_IS_UNKNOWN("log.processor.type.unknown"),
@@ -44,39 +47,6 @@ public enum I18Constant {
     LOG_PROCESSOR_LOOKUP_PROCESSOR_LOOKUP_TABLE_IS_EMPTY("log.processor.lookup.processor.lookup.table.is.empty"),
 
     //endregion
-    //region LogIndex Messages
-    LOG_INDEX_VALIDATION_ERROR("log.index.validation.errors"),
-    LOG_INDEX_NAME_IS_EMPTY("log.index.name.absent"),
-    LOG_INDEX_FILTER_IS_EMPTY("log.index.filter.absent"),
-    LOG_INDEX_EXCLUSION_FILTER_NAME_IS_EMPTY("log.index.exclusion.filter.name.absent"),
-    LOG_INDEX_EXCLUSION_FILTER_FILTER_SAMPLE_RATE_RANGE("log.index.exclusion.filter.filter.sample.rate.range"),
-    LOG_INDEX_EXCLUSION_FILTER_FILTER_IS_EMPTY("log.index.exclusion.filter.filter.absent"),
-    LOG_INDEX_ORDER_NAME_LIST_NOT_COMPLETE("log.index.order.name.list.not.complete"),
-    LOG_INDEX_NOT_FOUND("log.index.absent"),
-    LOG_INDEX_NAME_PATTERN_INVALID("log.index.name.pattern.invalid"),
-    LOG_INDEX_SAMPLE_RATE_TYPE_ABSENT("log.index.sample.rate.type.absent"),
-    LOG_INDEX_EXCLUSION_FILTER_FILTER_SAMPLE_RATE_TYPE_INVALID("log.index.exclusion.filter.filter.sample.rate.type.invalid"),
-
-    //endregion
-
-    //region Standard Attribute Messages
-    STANDARD_ATTRIBUTE_ATTRIBUTE_ABSENT("standard.attribute.attribute.absent"),
-    STANDARD_ATTRIBUTE_ATTRIBUTE_TYPE_ABSENT("standard.attribute.attribute.type.absent"),
-    STANDARD_ATTRIBUTE_NOT_FOUND("standard.attribute.absent"),
-    STANDARD_ATTRIBUTE_ORDER_ID_LIST_NOT_COMPLETE("standard.attribute.order.id.list.not.complete"),
-    STANDARD_ATTRIBUTE_TYPE_INVALID("standard.attribute.type.invalid"),
-    //endregion
-
-    //region Log Metrics Pipeline Messages
-    LOG_METRIC_VALIDATION_ERROR("log.metric.validation.errors"),
-    LOG_METRIC_NOT_FOUND("log.metric.absent"),
-    LOG_METRIC_NAME_IS_EMPTY("log.metric.name.absent"),
-    LOG_METRIC_TYPE_IS_EMPTY("log.metric.type.absent"),
-    LOG_METRIC_TYPE_INVALID("log.metric.type.invalid"),
-    LOG_METRIC_ATTRIBUTE_ABSENT("log.metric.attribute.absent"),
-    LOG_METRIC_ATTRIBUTE_AGGREGATION_TYPE_IS_EMPTY("log.metric.attribute.aggregation.type.absent"),
-    LOG_METRIC_ATTRIBUTE_AGGREGATION_TYPE_INVALID("log.metric.attribute.aggregation.invalid"),
-
     ;
 
     //endregion

@@ -2,7 +2,7 @@ package ai.logzi.core.management.logmanagement.service.validation.util;
 
 import ai.logzi.core.management.logmanagement.service.dto.log.LogPipelineDto;
 import ai.logzi.core.management.logmanagement.service.dto.log.processor.BaseProcessorDto;
-import ai.logzi.core.management.logmanagement.service.constant.I18Constant;
+import ai.logzi.core.microservice.logmanagement.common.constant.I18Constant;
 import ai.logzi.core.management.logmanagement.service.validation.dto.FieldErrorDto;
 import ai.logzi.core.management.logmanagement.service.type.log.LogPipelineType;
 import org.springframework.stereotype.Component;

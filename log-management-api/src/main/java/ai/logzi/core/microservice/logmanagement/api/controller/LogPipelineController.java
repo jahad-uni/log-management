@@ -5,7 +5,7 @@ import ai.logzi.core.management.logmanagement.service.dto.log.LogPipelineDto;
 import ai.logzi.core.microservice.logmanagement.api.annotation.CheckRole;
 import ai.logzi.core.microservice.logmanagement.api.mapper.LogPipelineMapper;
 import ai.logzi.core.microservice.logmanagement.api.model.log.LogPipeline;
-import ai.logzi.core.management.logmanagement.service.constant.I18Constant;
+import ai.logzi.core.microservice.logmanagement.common.constant.I18Constant;
 import ai.logzi.core.microservice.logmanagement.api.model.log.LogPipelineProcessor;
 import ai.logzi.core.microservice.logmanagement.common.helper.LocaleHelper;
 import ai.logzi.core.microservice.logmanagement.api.model.SuccessResponse;
@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @Tag(name = "Log Pipeline Api",
@@ -51,10 +52,10 @@ public class LogPipelineController {
             var logPipelineFilterDto = this.logPipelineService
                     .generateLogPipelineFilterDto(filter);
             logPipelineDtoList = this.logPipelineService
-                    .getAllLogPipelinesOrderByOrder(tenantId, logPipelineFilterDto);
+                    .getAllLogPipelines(tenantId, logPipelineFilterDto);
         } else {
             logPipelineDtoList = this.logPipelineService
-                    .getAllLogPipelinesOrderByOrder(tenantId);
+                    .getAllLogPipelines(tenantId);
         }
 
         logPipelineList = this.logPipelineMapper
@@ -105,7 +106,7 @@ public class LogPipelineController {
     }
 
     @RequestMapping(value = "/pipelines", method = RequestMethod.POST)
-    @CheckRole(roles = {"admin","editor"})
+    @CheckRole(roles = {"admin", "editor"})
     public ResponseEntity<SuccessResponse<LogPipeline>>
     createLogPipeline(@PathVariable final String tenantId,
                       @RequestHeader("user_id") final String userId,
@@ -187,7 +188,7 @@ public class LogPipelineController {
                 .getLogPipeline(tenantId, userId, logPipeline.getId())).withSelfRel();
         logPipeline.add(selfLink);
 
-        if (logPipeline.getProcessors()!=null && logPipeline.getProcessors().size() > 0) {
+        if (logPipeline.getProcessors() != null && logPipeline.getProcessors().size() > 0) {
             Link processorsLink = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder
                     .methodOn(LogPipelineController.class)
                     .getLogPipelineProcessors(tenantId, userId, logPipeline.getId())).withRel("processors");
