@@ -114,11 +114,11 @@ public class LogPipelineController {
                       @RequestHeader("user_id") final String userId,
                       @RequestBody @Validated(value = OnCreate.class) final LogPipeline logPipeline) throws Exception {
 
-//        var logPipelineDto = this.logPipelineCustomMapper
-//                .toLogPipeLineDto(tenantId, userId, logPipeline);
-
-        var logPipelineDto = this.logPipelineMapper
+        var logPipelineDto = this.logPipelineCustomMapper
                 .toLogPipeLineDto(tenantId, userId, logPipeline);
+
+//        var logPipelineDto = this.logPipelineMapper
+//                .toLogPipeLineDto(tenantId, userId, logPipeline);
 
         logPipelineDto = this.logPipelineService
                 .createLogPipeline(tenantId, logPipelineDto);

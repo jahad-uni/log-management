@@ -21,7 +21,7 @@ public interface LogPipelineMapper {
     LogPipelineDto toLogPipeLineDto(String tenantId,
                                     String userId,
                                     LogPipeline logPipeline);
-    @Mapping(target="updatedTime", source = "logPipeline.updatedAt")
+//    @Mapping(target="updatedTime", source = "logPipeline.updatedAt")
     LogPipelineDto toLogPipeLineDto(String tenantId,
                                     String userId,
                                     String id,

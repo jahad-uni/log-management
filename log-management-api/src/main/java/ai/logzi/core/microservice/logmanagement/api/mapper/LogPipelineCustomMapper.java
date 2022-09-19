@@ -19,4 +19,9 @@ public abstract class LogPipelineCustomMapper {
                                     String userId,
                                     LogPipeline logPipeline);
 
+
+    public LogPipelineDto toLogPipeLineDtoCustom(String tenantId, String userId, LogPipeline logPipeline){
+
+        return new LogPipelineDto();
+    }
 }

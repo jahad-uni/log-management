@@ -9,10 +9,10 @@ springdoc:
     operationsSorter: method
 
 spring:
-#  security:
-#    user:
-#      name: admin
-#      password: admin
+  #  security:
+  #    user:
+  #      name: admin
+  #      password: admin
 
   messages:
     encoding: UTF-8
@@ -22,20 +22,14 @@ spring:
     mongodb:
       database: logzi
       url: mongodb://localhost:27017
-#info:
-#  app:
-#    name: logzi
-#    type: SpringBootApplication
-#    java:
-#      version: 11
+info:
+  app:
+    name: logzi
+    type: SpringBootApplication
+    java:
+      version: 11
 
 management:
-  info:
-    app:
-      name: logzi
-      type: SpringBootApplication
-      java:
-        version: 11
   security:
     enabled: false
     roles: ADMIN

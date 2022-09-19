@@ -96,7 +96,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpStatus status,
                                                                   WebRequest request) {
         log.error(exception.getMessage());
-        ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now().toString(),
+        ErrorResponse errorResponse = new ErrorResponse(
+                LocalDateTime.now().toString(),
                 HttpStatus.UNPROCESSABLE_ENTITY.value(),
                 "Validation error. Check 'errors' field for details.");
         for (FieldError fieldError : exception.getBindingResult().getFieldErrors()) {
